@@ -19,7 +19,7 @@
         Riwayat Pengajuan
     </a>
 
-    <a href="{{ route('profile.edit') }}"
+    <a href="{{ route('profile.show') }}"
        class="list-group-item list-group-item-action">
         Profil
     </a>
@@ -56,7 +56,20 @@
                 <h5>Status Terakhir</h5>
 
                 <h2>
-                    {{ $statusTerakhir ?? 'Belum Ada Pengajuan' }}
+                   @switch($pengajuanTerakhir->status)
+
+    @case('Pending TU')
+       Verifikasi TU
+        @break
+
+    @case('Pending Kaprodi')
+         Verifikasi Kaprodi
+        @break
+
+    @default
+        {{ $pengajuanTerakhir->status }}
+
+@endswitch
                 </h2>
             </div>
         </div>

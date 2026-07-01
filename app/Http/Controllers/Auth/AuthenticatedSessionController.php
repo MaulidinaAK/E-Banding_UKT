@@ -40,10 +40,6 @@ if (auth()->user()->role->name == 'Kaprodi') {
     return redirect()->route('kaprodi.dashboard');
 }
 
-if (auth()->user()->role->name == 'Dekan') {
-    return redirect()->route('dekan.dashboard');
-}
-
 return redirect('/');
     }
 

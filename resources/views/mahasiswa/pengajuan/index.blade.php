@@ -14,7 +14,7 @@
         Pengajuan Banding
     </a>
 
-    <a href="{{ route('profile.edit') }}"
+    <a href="{{ route('profile.show') }}"
        class="list-group-item list-group-item-action">
         Profil
     </a>
@@ -54,6 +54,7 @@
                     <th>UKT Saat Ini</th>
                     <th>UKT Diajukan</th>
                     <th>Bukti</th>
+                     <th>Tanggal Pengajuan</th>
                     <th>Status</th> 
                 </tr>
 
@@ -85,7 +86,28 @@
                         @endif
                     </td>
 
-                    <td>{{ $pengajuan->status }}</td>
+                      <td>
+        {{ $pengajuan->created_at->format('d M Y') }}
+        <br>
+        <small class="text-muted">
+            {{ $pengajuan->created_at->format('H:i') }} WIB
+        </small>
+    </td>
+
+                    <td>@switch($pengajuan->status)
+
+    @case('Pending TU')
+        Menunggu Verifikasi TU
+        @break
+
+    @case('Pending Kaprodi')
+        Menunggu Verifikasi Kaprodi
+        @break
+
+    @default
+        {{ $pengajuan->status }}
+
+@endswitch</td>
 
                     </tr>
 
@@ -93,7 +115,7 @@
 
                     <tr>
 
-                        <td colspan="6" class="text-center">
+                        <td colspan="7" class="text-center">
 
                             Belum ada pengajuan.
 

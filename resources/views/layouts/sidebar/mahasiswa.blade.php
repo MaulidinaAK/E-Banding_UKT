@@ -15,8 +15,8 @@
         Riwayat Pengajuan
     </a>
 
-    <a href="{{ route('profile.edit') }}"
-       class="list-group-item list-group-item-action {{ request()->routeIs('profile.edit') ? 'active' : '' }}">
+    <a href="{{ route('profile.show') }}"
+       class="list-group-item list-group-item-action {{ request()->routeIs('profile.show') ? 'active' : '' }}">
         Profil
     </a>
 

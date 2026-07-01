@@ -2,37 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 use App\Models\Pengajuan;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function mahasiswa(): View
-    {
-        $totalPengajuan = Pengajuan::where('user_id', auth()->id())->count();
+    
+public function mahasiswa(): View
+{
+    $totalPengajuan = Pengajuan::where('user_id', auth()->id())->count();
 
-        $statusTerakhir = Pengajuan::where('user_id', auth()->id())
-            ->latest()
-            ->value('status');
+    $pengajuanTerakhir = Pengajuan::where('user_id', auth()->id())
+        ->latest()
+        ->first();
 
-        return view('dashboard.mahasiswa', compact(
-            'totalPengajuan',
-            'statusTerakhir'
-        ));
-    }
+    return view('dashboard.mahasiswa', compact(
+        'totalPengajuan',
+        'pengajuanTerakhir'
+    ));
+}
 
     public function admin(): View
     {
-        return view('dashboard.admin');
+        $totalPengajuan = Pengajuan::count();
+
+        $pendingTU = Pengajuan::where('status', 'Pending TU')->count();
+        $pendingKaprodi = Pengajuan::where('status', 'Pending Kaprodi')->count();
+        $revisi = Pengajuan::where('status', 'Revisi')->count();
+        $ditolak = Pengajuan::where('status', 'Ditolak')->count();
+
+        return view('dashboard.admin', compact(
+            'totalPengajuan',
+            'pendingTU',
+            'pendingKaprodi',
+            'revisi',
+            'ditolak'
+        ));
     }
 
     public function kaprodi(): View
-    {
-        return view('dashboard.kaprodi');
-    }
+{
+    $pendingKaprodi = Pengajuan::where('status', 'Pending Kaprodi')->count();
 
-    public function dekan(): View
-    {
-        return view('dashboard.dekan');
-    }
+    $pendingDekan = Pengajuan::where('status', 'Disetujui')->count();
+
+    $revisi = Pengajuan::where('status', 'Revisi')->count();
+
+    $ditolak = Pengajuan::where('status', 'Ditolak')->count();
+
+    return view('dashboard.kaprodi', compact(
+        'pendingKaprodi',
+        'pendingDekan',
+        'revisi',
+        'ditolak'
+    ));
+}
+
 }

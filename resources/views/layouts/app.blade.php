@@ -42,7 +42,19 @@
     <h5>Menu</h5>
     <hr>
 
-    @include('layouts.sidebar')
+    @if(auth()->user()->role->name == 'Mahasiswa')
+
+        @include('layouts.sidebar.mahasiswa')
+
+    @elseif(auth()->user()->role->name == 'Admin TU')
+
+        @include('layouts.sidebar.admin')
+
+    @elseif(auth()->user()->role->name == 'Kaprodi')
+
+        @include('layouts.sidebar.kaprodi')
+
+    @endif
 
 </div>
 

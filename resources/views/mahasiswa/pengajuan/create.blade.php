@@ -14,7 +14,7 @@
         Pengajuan Banding
     </a>
 
-    <a href="{{ route('profile.edit') }}"
+    <a href="{{ route('profile.show') }}"
        class="list-group-item list-group-item-action">
         Profil
     </a>
