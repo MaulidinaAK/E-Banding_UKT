@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Pengajuan;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
@@ -71,5 +72,14 @@ class User extends Authenticatable
 public function pengajuans()
 {
     return $this->hasMany(Pengajuan::class);
+}
+
+public function getPhotoUrlAttribute()
+{
+    if ($this->photo) {
+        return Storage::url($this->photo);
+    }
+
+    return asset('images/default-profile.png');
 }
 }

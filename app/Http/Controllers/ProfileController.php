@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -61,14 +62,21 @@ class ProfileController extends Controller
     ];
 
     // 🔥 FIX UPLOAD FOTO
-    if ($request->hasFile('photo')) {
-        $file = $request->file('photo');
-        $filename = time().'_'.$file->getClientOriginalName();
+ if ($request->hasFile('photo')) {
 
-        $file->storeAs('public/foto', $filename);
+    $file = $request->file('photo');
+    $filename = time().'_'.$file->getClientOriginalName();
 
-        $data['foto'] = 'foto/'.$filename;
-    }
+    Storage::disk('public')->makeDirectory('photo');
+
+    Storage::disk('public')->putFileAs(
+        'photo',
+        $file,
+        $filename
+    );
+
+    $data['photo'] = 'photo/'.$filename;
+}
 
     $user->update($data);
 

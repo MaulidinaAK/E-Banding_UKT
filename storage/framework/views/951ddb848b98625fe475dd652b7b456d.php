@@ -11,12 +11,13 @@
 
 <div class="text-center mb-3">
 
-    <?php if($user->foto): ?>
-        <img src="<?php echo e(asset('storage/'.$user->foto)); ?>"
-             class="rounded-circle"
-             width="120"
-             height="120"
-             style="object-fit: cover;">
+    <?php if($user->photo): ?>
+
+<img src="<?php echo e($user->photo_url); ?>"
+     width="120"
+     height="120"
+     class="rounded-circle mb-3"
+     style="object-fit:cover;">
     <?php else: ?>
         <div style="
             width:120px;
@@ -40,16 +41,6 @@
 
     <div class="card-body">
 
-        <?php if($user->foto): ?>
-    <img src="<?php echo e(asset('storage/'.$user->foto)); ?>"
-         width="120"
-         height="120"
-         class="rounded-circle mb-3">
-<?php else: ?>
-    <div class="text-muted mb-2">
-        Belum ada foto
-    </div>
-<?php endif; ?>
 
 <h5><?php echo e($user->name); ?></h5>
 

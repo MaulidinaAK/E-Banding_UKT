@@ -12,12 +12,13 @@
 
 <div class="text-center mb-3">
 
-    @if($user->foto)
-        <img src="{{ asset('storage/'.$user->foto) }}"
-             class="rounded-circle"
-             width="120"
-             height="120"
-             style="object-fit: cover;">
+    @if($user->photo)
+
+<img src="{{ $user->photo_url }}"
+     width="120"
+     height="120"
+     class="rounded-circle mb-3"
+     style="object-fit:cover;">
     @else
         <div style="
             width:120px;
@@ -41,16 +42,6 @@
 
     <div class="card-body">
 
-        @if($user->foto)
-    <img src="{{ asset('storage/'.$user->foto) }}"
-         width="120"
-         height="120"
-         class="rounded-circle mb-3">
-@else
-    <div class="text-muted mb-2">
-        Belum ada foto
-    </div>
-@endif
 
 <h5>{{ $user->name }}</h5>
 

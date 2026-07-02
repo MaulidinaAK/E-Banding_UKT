@@ -44,7 +44,7 @@ Selamat datang,
 <div class="col-md-3">
 <div class="card shadow">
 <div class="card-body text-center">
-<h5>Ditolak</h5>
+<h5>Revisi/Ditolak</h5>
 <h2><?php echo e($ditolak); ?></h2>
 </div>
 </div>
