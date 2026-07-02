@@ -61,4 +61,19 @@ class DekanController extends Controller
             ->route('dekan.pengajuan.show', $pengajuan)
             ->with('success', 'Status berhasil diperbarui.');
     }
+
+    public function dekanDashboard(): View
+{
+    $pendingFinal = Pengajuan::where('status', 'Pending Dekan')->count();
+
+    $approvedFinal = Pengajuan::where('status', 'Disetujui')->count();
+
+    $rejected = Pengajuan::where('status', 'Ditolak')->count();
+
+    return view('dashboard.dekan', compact(
+        'pendingFinal',
+        'approvedFinal',
+        'rejected'
+    ));
+}
 }

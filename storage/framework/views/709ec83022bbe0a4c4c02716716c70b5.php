@@ -1,8 +1,8 @@
-@extends('layouts.app')
 
-@section('content')
 
-<h2 class="mb-4">Riwayat Verifikasi Kaprodi</h2>
+<?php $__env->startSection('content'); ?>
+
+<h2 class="mb-4">Riwayat Verifikasi Dekan</h2>
 
 <div class="card shadow-sm">
 
@@ -27,30 +27,32 @@
 
             <tbody>
 
-                @forelse($pengajuans as $pengajuan)
+                <?php $__empty_1 = true; $__currentLoopData = $pengajuans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pengajuan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 
                 <tr>
 
-                    <td>{{ $loop->iteration }}</td>
+                    <td><?php echo e($loop->iteration); ?></td>
 
-                    <td>{{ $pengajuan->user->name }}</td>
+                    <td><?php echo e($pengajuan->user->name); ?></td>
 
-                    <td>{{ $pengajuan->semester }}</td>
+                    <td><?php echo e($pengajuan->semester); ?></td>
 
                     <td>
-                        Rp {{ number_format($pengajuan->ukt_pengajuan,0,',','.') }}
+                        Rp <?php echo e(number_format($pengajuan->ukt_pengajuan,0,',','.')); ?>
+
                     </td>
 
                     <td>
-    {{ $pengajuan->created_at->format('d M Y') }}
+    <?php echo e($pengajuan->created_at->format('d M Y')); ?>
+
     <br>
     <small class="text-muted">
-        {{ $pengajuan->created_at->format('H:i') }} WIB
+        <?php echo e($pengajuan->created_at->format('H:i')); ?> WIB
     </small>
 </td>
 
-                   <td>
-    @php
+                  <td>
+    <?php
         $status = $pengajuan->status;
 
         $badgeClass = match($status) {
@@ -65,17 +67,18 @@
             'Ditolak' => 'bi-x-circle-fill',
             default => 'bi-hourglass-split',
         };
-    @endphp
+    ?>
 
-    <span class="status-badge {{ $badgeClass }}">
-        <i class="bi {{ $icon }} me-1"></i>
-        {{ $status }}
+    <span class="status-badge <?php echo e($badgeClass); ?>">
+        <i class="bi <?php echo e($icon); ?> me-1"></i>
+        <?php echo e($status); ?>
+
     </span>
 </td>
 
                 </tr>
 
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
 
                 <tr>
 
@@ -87,7 +90,7 @@
 
                 </tr>
 
-                @endforelse
+                <?php endif; ?>
 
             </tbody>
 
@@ -97,4 +100,5 @@
 
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Maulidina Aisha K\Documents\KULIAH\4. Semester 4\Analisis dan Desain Sistem 4B\App E-Banding UKT\resources\views/dekan/pengajuan/riwayat.blade.php ENDPATH**/ ?>

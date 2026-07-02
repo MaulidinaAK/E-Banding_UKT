@@ -11,39 +11,33 @@
 
 <div class="row g-3">
 
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
+    <div class="col-md-4">
+        <div class="stat-card blue">
+            <div>
                 <h6>Total Pengajuan</h6>
-                <h2><?php echo e($totalPengajuan); ?></h2>
+                <h3><?php echo e($totalPengajuan); ?></h3>
             </div>
+            <i class="bi bi-inbox stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-                <h6>Verifikasi TU</h6>
-                <h2><?php echo e($pendingTU); ?></h2>
+    <div class="col-md-4">
+        <div class="stat-card yellow">
+            <div>
+                <h6>Pending Verifikasi</h6>
+                <h3><?php echo e($pending); ?></h3>
             </div>
+            <i class="bi bi-hourglass-split stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-                <h6>Verifikasi Kaprodi</h6>
-                <h2><?php echo e($pendingKaprodi); ?></h2>
+    <div class="col-md-4">
+        <div class="stat-card green">
+            <div>
+                <h6>Disetujui</h6>
+                <h3><?php echo e($disetujui); ?></h3>
             </div>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-                <h6>Revisi / Ditolak</h6>
-                <h2><?php echo e($revisi + $ditolak); ?></h2>
-            </div>
+            <i class="bi bi-check-circle stat-icon"></i>
         </div>
     </div>
 

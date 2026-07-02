@@ -6,69 +6,81 @@
     Dashboard Kaprodi
 </h2>
 
-<div class="alert alert-success">
-    Selamat datang,
-    <strong>{{ auth()->user()->name }}</strong>
+<div class="welcome-banner mb-4" style="padding: 10px 0; border-bottom: 1px solid #e2e8f0;">
+    <h5 style="color: #64748b; font-size: 0.9rem; font-weight: 500; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em;">
+        <span id="greeting">Selamat Datang</span>,
+    </h5>
+    <h2 style="color: #1e293b; font-size: 1.75rem; font-weight: 700; margin: 0; letter-spacing: -0.02em;">
+        {{ auth()->user()->name }} 👋
+    </h2>
 </div>
 
-<div class="row g-3 mb-3">
+<script>
+    const hour = new Date().getHours();
+    let greeting = "Selamat Malam";
+    if (hour < 11) greeting = "Selamat Pagi";
+    else if (hour < 15) greeting = "Selamat Siang";
+    else if (hour < 19) greeting = "Selamat Sore";
+    document.getElementById('greeting').innerText = greeting;
+</script>
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Total Pengajuan</h6>
-                <h3 class="mb-0">{{ $totalPengajuan }}</h3>
+<div class="row g-3">
+
+    <!-- Total Pengajuan -->
+    <div class="col-md-4">
+        <div class="stat-card dark">
+            <div>
+                <h6>Total Pengajuan</h6>
+                <h3>{{ $totalPengajuan }}</h3>
             </div>
+            <i class="bi bi-folder stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Menunggu Verifikasi</h6>
-                <h3 class="mb-0">{{ $pendingKaprodi }}</h3>
+    <!-- Menunggu Verifikasi -->
+    <div class="col-md-4">
+        <div class="stat-card yellow">
+            <div>
+                <h6>Menunggu Verifikasi</h6>
+                <h3>{{ $pendingKaprodi }}</h3>
             </div>
+            <i class="bi bi-hourglass stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Pending Dekan</h6>
-                <h3 class="mb-0">{{ $pendingDekan }}</h3>
+
+    <!-- Disetujui -->
+    <div class="col-md-4">
+        <div class="stat-card green">
+            <div>
+                <h6>Disetujui Kaprodi</h6>
+                <h3>{{ $approved }}</h3>
             </div>
+            <i class="bi bi-check2-circle stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Revisi</h6>
-                <h3 class="mb-0">{{ $revisi }}</h3>
+    <!-- Ditolak -->
+    <div class="col-md-4">
+        <div class="stat-card red">
+            <div>
+                <h6>Ditolak</h6>
+                <h3>{{ $ditolak }}</h3>
             </div>
+            <i class="bi bi-x-circle stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Ditolak</h6>
-                <h3 class="mb-0">{{ $ditolak }}</h3>
+    <!-- Revisi -->
+    <div class="col-md-4">
+        <div class="stat-card orange">
+            <div>
+                <h6>Revisi</h6>
+                <h3>{{ $revisi }}</h3>
             </div>
+            <i class="bi bi-pencil-square stat-icon"></i>
         </div>
     </div>
 
 </div>
-
-<div class="mt-4">
-
-    <a href="{{ route('kaprodi.pengajuan.index') }}"
-       class="btn btn-primary">
-
-        Verifikasi Pengajuan
-
-    </a>
-
-</div>
-
 @endsection

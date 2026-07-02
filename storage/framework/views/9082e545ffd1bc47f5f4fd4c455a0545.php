@@ -11,65 +11,64 @@
     <strong><?php echo e(auth()->user()->name); ?></strong>
 </div>
 
-<div class="row g-3 mb-3">
+<div class="row g-3">
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Total Pengajuan</h6>
-                <h3 class="mb-0"><?php echo e($totalPengajuan); ?></h3>
+    <!-- Total Pengajuan -->
+    <div class="col-md-4">
+        <div class="stat-card dark">
+            <div>
+                <h6>Total Pengajuan</h6>
+                <h3><?php echo e($totalPengajuan); ?></h3>
             </div>
+            <i class="bi bi-folder stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Menunggu Verifikasi</h6>
-                <h3 class="mb-0"><?php echo e($pendingKaprodi); ?></h3>
+    <!-- Menunggu Verifikasi -->
+    <div class="col-md-4">
+        <div class="stat-card yellow">
+            <div>
+                <h6>Menunggu Verifikasi</h6>
+                <h3><?php echo e($pendingKaprodi); ?></h3>
             </div>
+            <i class="bi bi-hourglass stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Pending Dekan</h6>
-                <h3 class="mb-0"><?php echo e($pendingDekan); ?></h3>
+
+    <!-- Disetujui -->
+    <div class="col-md-4">
+        <div class="stat-card green">
+            <div>
+                <h6>Disetujui Kaprodi</h6>
+                <h3><?php echo e($approved); ?></h3>
             </div>
+            <i class="bi bi-check2-circle stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Revisi</h6>
-                <h3 class="mb-0"><?php echo e($revisi); ?></h3>
+    <!-- Ditolak -->
+    <div class="col-md-4">
+        <div class="stat-card red">
+            <div>
+                <h6>Ditolak</h6>
+                <h3><?php echo e($ditolak); ?></h3>
             </div>
+            <i class="bi bi-x-circle stat-icon"></i>
         </div>
     </div>
 
-    <div class="col-6 col-md-3">
-        <div class="card border text-center h-100">
-            <div class="card-body py-3">
-                <h6 class="text-muted mb-2">Ditolak</h6>
-                <h3 class="mb-0"><?php echo e($ditolak); ?></h3>
+    <!-- Revisi -->
+    <div class="col-md-4">
+        <div class="stat-card orange">
+            <div>
+                <h6>Revisi</h6>
+                <h3><?php echo e($revisi); ?></h3>
             </div>
+            <i class="bi bi-pencil-square stat-icon"></i>
         </div>
     </div>
 
 </div>
-
-<div class="mt-4">
-
-    <a href="<?php echo e(route('kaprodi.pengajuan.index')); ?>"
-       class="btn btn-primary">
-
-        Verifikasi Pengajuan
-
-    </a>
-
-</div>
-
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Maulidina Aisha K\Documents\KULIAH\4. Semester 4\Analisis dan Desain Sistem 4B\App E-Banding UKT\resources\views/dashboard/kaprodi.blade.php ENDPATH**/ ?>

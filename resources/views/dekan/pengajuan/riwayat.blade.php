@@ -49,15 +49,29 @@
     </small>
 </td>
 
-                    <td>
+                  <td>
+    @php
+        $status = $pengajuan->status;
 
-                        <span class="badge bg-success">
+        $badgeClass = match($status) {
+            'Disetujui' => 'status-success',
+            'Ditolak' => 'status-danger',
+            'Pending Kaprodi', 'Pending Dekan', 'Pending TU' => 'status-warning',
+            default => 'status-secondary',
+        };
 
-                            {{ $pengajuan->status }}
+        $icon = match($status) {
+            'Disetujui' => 'bi-check-circle-fill',
+            'Ditolak' => 'bi-x-circle-fill',
+            default => 'bi-hourglass-split',
+        };
+    @endphp
 
-                        </span>
-
-                    </td>
+    <span class="status-badge {{ $badgeClass }}">
+        <i class="bi {{ $icon }} me-1"></i>
+        {{ $status }}
+    </span>
+</td>
 
                 </tr>
 

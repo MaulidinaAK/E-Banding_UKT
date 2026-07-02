@@ -46,8 +46,8 @@ Route::middleware(['auth', 'role:Mahasiswa'])->group(function () {
 // Dashboard Admin TU
 Route::middleware(['auth', 'role:Admin TU'])->group(function () {
 
-    Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
-        ->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminPengajuanController::class, 'adminDashboard'])
+    ->name('admin.dashboard');
 
     Route::get('/admin/pengajuan', [AdminPengajuanController::class, 'index'])
         ->name('admin.pengajuan.index');
@@ -70,8 +70,8 @@ Route::middleware(['auth', 'role:Admin TU'])->group(function () {
 // Dashboard Kaprodi
 Route::middleware(['auth', 'role:Kaprodi'])->group(function () {
 
-    Route::get('/kaprodi/dashboard', [DashboardController::class, 'kaprodi'])
-        ->name('kaprodi.dashboard');
+    Route::get('/kaprodi/dashboard', [AdminPengajuanController::class, 'kaprodiDashboard'])
+    ->name('kaprodi.dashboard');
 
     Route::get('/kaprodi/pengajuan', [AdminPengajuanController::class, 'kaprodiIndex'])
         ->name('kaprodi.pengajuan.index');
@@ -92,8 +92,8 @@ Route::middleware(['auth', 'role:Kaprodi'])->group(function () {
 
 Route::middleware(['auth', 'role:Dekan'])->group(function () {
 
-    Route::get('/dekan/dashboard', [DashboardController::class, 'dekan'])
-        ->name('dekan.dashboard');
+    Route::get('/dekan/dashboard', [DekanController::class, 'dekanDashboard'])
+    ->name('dekan.dashboard');
 
     Route::get('/dekan/pengajuan', [DekanController::class, 'index'])
         ->name('dekan.pengajuan.index');
