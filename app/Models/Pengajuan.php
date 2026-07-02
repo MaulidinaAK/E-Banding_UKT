@@ -8,14 +8,26 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Pengajuan extends Model
 {
     protected $fillable = [
-        'user_id',
-        'semester',
-        'ukt_sekarang',
-        'ukt_pengajuan',
-        'alasan',
-        'bukti',
-        'status',
-    ];
+
+    'user_id',
+
+    'semester',
+
+    'ukt_sekarang',
+
+    'ukt_pengajuan',
+
+    'alasan',
+
+    'bukti',
+
+    'status',
+
+    'kaprodi_verified_at',
+
+    'dekan_verified_at',
+
+];
 
     public function user(): BelongsTo
     {

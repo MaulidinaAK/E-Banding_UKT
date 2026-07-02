@@ -43,11 +43,37 @@
 
                     <td>
 
+                        @if($pengajuan->status == 'Pending Kaprodi')
+
                         <span class="badge bg-warning">
-
-                            {{ $pengajuan->status }}
-
+                        Pending Kaprodi
                         </span>
+
+                        @elseif($pengajuan->status == 'Pending Dekan')
+
+                        <span class="badge bg-primary">
+                        Pending Dekan
+                        </span>
+
+                        @elseif($pengajuan->status == 'Revisi')
+
+                        <span class="badge bg-secondary">
+                        Revisi
+                        </span>
+
+                        @elseif($pengajuan->status == 'Ditolak')
+
+                        <span class="badge bg-danger">
+                        Ditolak
+                        </span>
+
+                        @else
+
+                        <span class="badge bg-success">
+                        {{ $pengajuan->status }}
+                        </span>
+
+                        @endif
 
                     </td>
 

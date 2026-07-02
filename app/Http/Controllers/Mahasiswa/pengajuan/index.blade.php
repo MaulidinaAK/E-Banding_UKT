@@ -1,42 +1,5 @@
 @extends('layouts.app')
 
-@section('sidebar')
-
-<div class="list-group">
-
-    <a href="{{ route('mahasiswa.dashboard') }}"
-       class="list-group-item list-group-item-action">
-        Dashboard
-    </a>
-
-    <a href="{{ route('pengajuan.create') }}"
-       class="list-group-item list-group-item-action">
-        Ajukan Banding
-    </a>
-
-    <a href="{{ route('pengajuan.index') }}"
-       class="list-group-item list-group-item-action active">
-        Riwayat Pengajuan
-    </a>
-
-    <a href="{{ route('profile.show') }}"
-       class="list-group-item list-group-item-action">
-        Profil
-    </a>
-
-</div>
-
-@endsection
-
-@section('content')
-
-<h2 class="mb-4">Riwayat Pengajuan Banding</h2>
-
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
 
 <a href="{{ route('pengajuan.create') }}" class="btn btn-primary mb-3">
     + Ajukan Banding

@@ -25,7 +25,8 @@ class User extends Authenticatable
     'name',
     'email',
     'password',
-    'role',
+
+    'role_id',
 
     'nim',
     'nip',
@@ -37,7 +38,7 @@ class User extends Authenticatable
 
     'no_hp',
 
-    'foto',
+    'photo',
 
 ];
 

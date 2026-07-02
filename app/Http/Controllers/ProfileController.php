@@ -30,7 +30,7 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(Request $request): RedirectResponse
+   public function update(Request $request): RedirectResponse
 {
     $request->validate([
         'name' => 'required|string|max:255',
@@ -38,36 +38,43 @@ class ProfileController extends Controller
 
         'nim' => 'nullable|string|max:30',
         'nip' => 'nullable|string|max:30',
-
         'prodi' => 'nullable|string|max:100',
         'fakultas' => 'nullable|string|max:100',
-
         'semester' => 'nullable|string|max:20',
-
         'no_hp' => 'nullable|string|max:20',
+
+        'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
     ]);
 
     $user = $request->user();
 
-    $user->update([
+    // default update data
+    $data = [
         'name' => $request->name,
         'email' => $request->email,
-
         'nim' => $request->nim,
         'nip' => $request->nip,
-
         'prodi' => $request->prodi,
         'fakultas' => $request->fakultas,
-
         'semester' => $request->semester,
-
         'no_hp' => $request->no_hp,
-    ]);
+    ];
 
-    return Redirect::route('profile.show')
-    ->with('success','Profil berhasil diperbarui.');
+    // 🔥 FIX UPLOAD FOTO
+    if ($request->hasFile('photo')) {
+        $file = $request->file('photo');
+        $filename = time().'_'.$file->getClientOriginalName();
+
+        $file->storeAs('public/foto', $filename);
+
+        $data['foto'] = 'foto/'.$filename;
+    }
+
+    $user->update($data);
+
+    return redirect()->route('profile.show')
+        ->with('success', 'Profil berhasil diperbarui.');
 }
-    
 
     /**
      * Delete the user's account.

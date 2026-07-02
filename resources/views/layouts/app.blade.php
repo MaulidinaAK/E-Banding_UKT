@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'E-Banding UKT' }}</title>
+    <title>E-Banding UKT</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- HAPUS / MATIKAN VITE CSS --}}
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<nav class="navbar navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="#">
-            E-Banding UKT
-        </a>
 
+        <span class="navbar-brand">E-Banding UKT</span>
+
+        @if(auth()->check())
         <div class="ms-auto d-flex align-items-center">
 
             <span class="text-white me-3">
@@ -31,6 +33,8 @@
             </form>
 
         </div>
+        @endif
+
     </div>
 </nav>
 
@@ -39,35 +43,36 @@
 
         <div class="col-md-2 bg-white border-end min-vh-100 p-3">
 
-    <h5>Menu</h5>
-    <hr>
+            <h5>Menu</h5>
+            <hr>
 
-    @if(auth()->user()->role->name == 'Mahasiswa')
+            @if(auth()->check() && auth()->user()->role)
 
-        @include('layouts.sidebar.mahasiswa')
+                @if(auth()->user()->role->name == 'Mahasiswa')
+                    @include('layouts.sidebar.mahasiswa')
 
-    @elseif(auth()->user()->role->name == 'Admin TU')
+                @elseif(auth()->user()->role->name == 'Admin TU')
+                    @include('layouts.sidebar.admin')
 
-        @include('layouts.sidebar.admin')
+                @elseif(auth()->user()->role->name == 'Kaprodi')
+                    @include('layouts.sidebar.kaprodi')
 
-    @elseif(auth()->user()->role->name == 'Kaprodi')
+                @elseif(auth()->user()->role->name == 'Dekan')
+                    @include('layouts.sidebar.dekan')
+                @endif
 
-        @include('layouts.sidebar.kaprodi')
+            @endif
 
-    @endif
-
-</div>
+        </div>
 
         <div class="col-md-10 p-4">
-
             @yield('content')
-
         </div>
 
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>

@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Pengajuan;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class DekanController extends Controller
+{
+    /**
+     * Daftar pengajuan yang menunggu verifikasi Dekan
+     */
+    public function index(): View
+    {
+        $pengajuans = Pengajuan::with('user')
+    ->whereNotNull('kaprodi_verified_at')
+    ->where('status', 'Pending Dekan')
+    ->latest()
+    ->get();
+
+        return view('dekan.pengajuan.index', compact('pengajuans'));
+    }
+
+    /**
+     * Detail pengajuan
+     */
+    public function show(Pengajuan $pengajuan): View
+    {
+        return view('dekan.pengajuan.show', compact('pengajuan'));
+    }
+
+    /**
+     * Riwayat verifikasi Dekan
+     */
+    public function riwayat(): View
+    {
+        $pengajuans = Pengajuan::with('user')
+            ->whereNotNull('dekan_verified_at')
+            ->latest()
+            ->get();
+
+        return view('dekan.pengajuan.riwayat', compact('pengajuans'));
+    }
+
+    /**
+     * Update status oleh Dekan
+     */
+    public function updateStatus(Request $request, Pengajuan $pengajuan)
+    {
+        $request->validate([
+            'status' => 'required|in:Disetujui,Revisi,Ditolak',
+        ]);
+
+        $pengajuan->update([
+            'status' => $request->status,
+            'dekan_verified_at' => now(),
+        ]);
+
+        return redirect()
+            ->route('dekan.pengajuan.show', $pengajuan)
+            ->with('success', 'Status berhasil diperbarui.');
+    }
+}

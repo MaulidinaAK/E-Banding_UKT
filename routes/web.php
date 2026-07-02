@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Mahasiswa\PengajuanController;
 use App\Http\Controllers\Admin\PengajuanController as AdminPengajuanController;
+use App\Http\Controllers\DekanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,8 @@ Route::middleware('auth')->get('/dashboard', function () {
         'Admin TU' => redirect()->route('admin.dashboard'),
 
         'Kaprodi' => redirect()->route('kaprodi.dashboard'),
+
+        'Dekan' => redirect()->route('dekan.dashboard'),
 
         default => redirect('/'),
 
@@ -59,6 +62,9 @@ Route::middleware(['auth', 'role:Admin TU'])->group(function () {
     [AdminPengajuanController::class, 'updateStatus']
 )->name('admin.pengajuan.updateStatus');
 
+    Route::get('/admin/riwayat', [AdminPengajuanController::class, 'riwayat'])
+    ->name('admin.riwayat');
+
 });
 
 // Dashboard Kaprodi
@@ -83,6 +89,28 @@ Route::middleware(['auth', 'role:Kaprodi'])->group(function () {
 });
 
 // Dashboard Dekan
+
+Route::middleware(['auth', 'role:Dekan'])->group(function () {
+
+    Route::get('/dekan/dashboard', [DashboardController::class, 'dekan'])
+        ->name('dekan.dashboard');
+
+    Route::get('/dekan/pengajuan', [DekanController::class, 'index'])
+        ->name('dekan.pengajuan.index');
+
+    Route::get('/dekan/pengajuan/{pengajuan}', [DekanController::class, 'show'])
+        ->name('dekan.pengajuan.show');
+
+    Route::patch('/dekan/pengajuan/{pengajuan}/status',
+        [DekanController::class, 'updateStatus'])
+        ->name('dekan.pengajuan.updateStatus');
+
+    Route::get('/dekan/riwayat',
+        [DekanController::class, 'riwayat'])
+        ->name('dekan.riwayat');
+
+});
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'show'])

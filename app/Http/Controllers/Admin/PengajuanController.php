@@ -30,13 +30,29 @@ class PengajuanController extends Controller
         ]);
 
         $pengajuan->update([
-            'status' => $request->status
+            'status' => $request->status,
         ]);
 
         return redirect()
             ->route('admin.pengajuan.show', $pengajuan)
             ->with('success', 'Status berhasil diperbarui.');
     }
+
+    public function riwayat(): View
+{
+    $pengajuans = Pengajuan::with('user')
+        ->where(function ($query) {
+            $query->where('status', 'Pending Kaprodi')
+                  ->orWhere(function ($q) {
+                      $q->whereIn('status', ['Revisi', 'Ditolak'])
+                        ->whereNull('kaprodi_verified_at');
+                  });
+        })
+        ->latest()
+        ->get();
+
+    return view('admin.pengajuan.riwayat', compact('pengajuans'));
+}
 
     public function kaprodiIndex(): View
     {
@@ -54,28 +70,25 @@ class PengajuanController extends Controller
     }
 
     public function kaprodiUpdateStatus(Request $request, Pengajuan $pengajuan)
-    {
-        $request->validate([
-            'status' => 'required'
-        ]);
+{
+    $request->validate([
+        'status' => 'required|in:Pending Dekan,Revisi,Ditolak',
+    ]);
 
-        $pengajuan->update([
-            'status' => $request->status
-        ]);
+    $pengajuan->update([
+        'status' => $request->status,
+        'kaprodi_verified_at' => now(),
+    ]);
 
-        return redirect()
-            ->route('kaprodi.pengajuan.show', $pengajuan)
-            ->with('success', 'Status berhasil diperbarui.');
-    }
+    return redirect()
+        ->route('kaprodi.pengajuan.show', $pengajuan)
+        ->with('success', 'Status berhasil diperbarui.');
+}
 
     public function kaprodiRiwayat(): View
 {
     $pengajuans = Pengajuan::with('user')
-        ->whereIn('status', [
-            'Revisi',
-            'Ditolak',
-            'Disetujui'
-        ])
+        ->whereNotNull('kaprodi_verified_at')
         ->latest()
         ->get();
 

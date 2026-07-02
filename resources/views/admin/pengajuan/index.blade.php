@@ -49,21 +49,46 @@
     </td>
 
     <td>
-        @switch($pengajuan->status)
 
-            @case('Pending TU')
-                Menunggu Verifikasi TU
-                @break
+@if($pengajuan->status == 'Pending TU')
 
-            @case('Pending Kaprodi')
-                Menunggu Verifikasi Kaprodi
-                @break
+<span class="badge bg-warning">
+    Pending TU
+</span>
 
-            @default
-                {{ $pengajuan->status }}
+@elseif($pengajuan->status == 'Pending Kaprodi')
 
-        @endswitch
-    </td>
+<span class="badge bg-info">
+    Pending Kaprodi
+</span>
+
+@elseif($pengajuan->status == 'Pending Dekan')
+
+<span class="badge bg-primary">
+    Pending Dekan
+</span>
+
+@elseif($pengajuan->status == 'Disetujui')
+
+<span class="badge bg-success">
+    Disetujui
+</span>
+
+@elseif($pengajuan->status == 'Revisi')
+
+<span class="badge bg-secondary">
+    Revisi
+</span>
+
+@else
+
+<span class="badge bg-danger">
+    Ditolak
+</span>
+
+@endif
+
+</td>
 
     <td>
 

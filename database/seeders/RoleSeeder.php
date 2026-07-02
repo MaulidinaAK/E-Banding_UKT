@@ -7,13 +7,22 @@ use App\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Role::firstOrCreate(['name' => 'Mahasiswa']);
-        Role::firstOrCreate(['name' => 'Admin TU']);
-        Role::firstOrCreate(['name' => 'Kaprodi']);
+        Role::firstOrCreate([
+            'name' => 'Mahasiswa'
+        ]);
+
+        Role::firstOrCreate([
+            'name' => 'Admin TU'
+        ]);
+
+        Role::firstOrCreate([
+            'name' => 'Kaprodi'
+        ]);
+
+        Role::firstOrCreate([
+            'name' => 'Dekan'
+        ]);
     }
 }

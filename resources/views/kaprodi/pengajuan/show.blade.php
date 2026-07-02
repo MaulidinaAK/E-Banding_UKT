@@ -5,88 +5,75 @@
 <h2 class="mb-4">Detail Pengajuan Banding UKT</h2>
 
 <div class="card shadow-sm">
-
     <div class="card-body">
 
-        <table class="table">
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
 
-            <tr>
-                <th width="220">Nama Mahasiswa</th>
-                <td>{{ $pengajuan->user->name }}</td>
-            </tr>
+                <tr>
+                    <th width="220">Nama Mahasiswa</th>
+                    <td>{{ $pengajuan->user->name }}</td>
+                </tr>
 
-            <tr>
-                <th>Semester</th>
-                <td>{{ $pengajuan->semester }}</td>
-            </tr>
+                <tr>
+                    <th>Semester</th>
+                    <td>{{ $pengajuan->semester }}</td>
+                </tr>
 
-            <tr>
-    <th>Tanggal Pengajuan</th>
-    <td>
-        {{ $pengajuan->created_at->format('d F Y') }}
-        pukul
-        {{ $pengajuan->created_at->format('H:i') }} WIB
-    </td>
-</tr>
+                <tr>
+                    <th>Tanggal Pengajuan</th>
+                    <td>
+                        {{ $pengajuan->created_at->format('d F Y') }}
+                        pukul
+                        {{ $pengajuan->created_at->format('H:i') }} WIB
+                    </td>
+                </tr>
 
-            <tr>
-                <th>UKT Saat Ini</th>
-                <td>
-                    Rp {{ number_format($pengajuan->ukt_sekarang,0,',','.') }}
-                </td>
-            </tr>
+                <tr>
+                    <th>UKT Saat Ini</th>
+                    <td>
+                        Rp {{ number_format($pengajuan->ukt_sekarang,0,',','.') }}
+                    </td>
+                </tr>
 
-            <tr>
-                <th>UKT Diajukan</th>
-                <td>
-                    Rp {{ number_format($pengajuan->ukt_pengajuan,0,',','.') }}
-                </td>
-            </tr>
+                <tr>
+                    <th>UKT Diajukan</th>
+                    <td>
+                        Rp {{ number_format($pengajuan->ukt_pengajuan,0,',','.') }}
+                    </td>
+                </tr>
 
-            <tr>
-                <th>Alasan</th>
-                <td>{{ $pengajuan->alasan }}</td>
-            </tr>
+                <tr>
+                    <th>Alasan</th>
+                    <td>{{ $pengajuan->alasan }}</td>
+                </tr>
 
-            <tr>
-                <th>Bukti Pendukung</th>
-                <td>
+                <tr>
+                    <th>Bukti Pendukung</th>
+                    <td>
+                        @if($pengajuan->bukti)
+                            <a href="{{ asset('storage/'.$pengajuan->bukti) }}"
+                               target="_blank"
+                               class="btn btn-primary btn-sm">
+                                Lihat Bukti
+                            </a>
+                        @else
+                            <span class="text-danger">Tidak ada file</span>
+                        @endif
+                    </td>
+                </tr>
 
-                    @if($pengajuan->bukti)
-
-                        <a href="{{ asset('storage/'.$pengajuan->bukti) }}"
-                           target="_blank"
-                           class="btn btn-primary btn-sm">
-
-                            Lihat Bukti
-
-                        </a>
-
-                    @else
-
-                        <span class="text-danger">
-                            Tidak ada file
+                <tr>
+                    <th>Status</th>
+                    <td>
+                        <span class="badge bg-warning">
+                            {{ $pengajuan->status }}
                         </span>
+                    </td>
+                </tr>
 
-                    @endif
-
-                </td>
-            </tr>
-
-            <tr>
-                <th>Status</th>
-                <td>
-
-                    <span class="badge bg-warning">
-
-                        {{ $pengajuan->status }}
-
-                    </span>
-
-                </td>
-            </tr>
-
-        </table>
+            </table>
+        </div>
 
         <div class="mt-4">
 
@@ -99,9 +86,7 @@
                     @csrf
                     @method('PATCH')
 
-                    <input type="hidden"
-                           name="status"
-                           value="Disetujui">
+                    <input type="hidden" name="status" value="Pending Dekan">
 
                     <button class="btn btn-success">
                         Setujui
@@ -116,9 +101,7 @@
                     @csrf
                     @method('PATCH')
 
-                    <input type="hidden"
-                           name="status"
-                           value="Revisi">
+                    <input type="hidden" name="status" value="Revisi">
 
                     <button class="btn btn-warning">
                         Revisi
@@ -133,9 +116,7 @@
                     @csrf
                     @method('PATCH')
 
-                    <input type="hidden"
-                           name="status"
-                           value="Ditolak">
+                    <input type="hidden" name="status" value="Ditolak">
 
                     <button class="btn btn-danger">
                         Tolak
@@ -147,15 +128,12 @@
 
             <a href="{{ route('kaprodi.pengajuan.index') }}"
                class="btn btn-secondary">
-
                 Kembali
-
             </a>
 
         </div>
 
     </div>
-
 </div>
 
 @endsection

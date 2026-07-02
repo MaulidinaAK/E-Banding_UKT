@@ -11,70 +11,51 @@
     <strong>{{ auth()->user()->name }}</strong>
 </div>
 
-<div class="row g-3">
+<div class="row g-3 mb-3">
 
-    <div class="col-md-3">
-
-        <div class="card shadow-sm">
-
-            <div class="card-body text-center">
-
-                <h5>Menunggu Verifikasi</h5>
-
-                <h2>{{ $pendingKaprodi }}</h2>
-
+    <div class="col-6 col-md-3">
+        <div class="card border text-center h-100">
+            <div class="card-body py-3">
+                <h6 class="text-muted mb-2">Total Pengajuan</h6>
+                <h3 class="mb-0">{{ $totalPengajuan }}</h3>
             </div>
-
         </div>
-
     </div>
 
-    <div class="col-md-3">
-
-        <div class="card shadow-sm">
-
-            <div class="card-body text-center">
-
-                <h5>Disetujui</h5>
-
-                <h2>{{ $pendingDekan }}</h2>
-
+    <div class="col-6 col-md-3">
+        <div class="card border text-center h-100">
+            <div class="card-body py-3">
+                <h6 class="text-muted mb-2">Menunggu Verifikasi</h6>
+                <h3 class="mb-0">{{ $pendingKaprodi }}</h3>
             </div>
-
         </div>
-
     </div>
 
-    <div class="col-md-3">
-
-        <div class="card shadow-sm">
-
-            <div class="card-body text-center">
-
-                <h5>Revisi</h5>
-
-                <h2>{{ $revisi }}</h2>
-
+    <div class="col-6 col-md-3">
+        <div class="card border text-center h-100">
+            <div class="card-body py-3">
+                <h6 class="text-muted mb-2">Pending Dekan</h6>
+                <h3 class="mb-0">{{ $pendingDekan }}</h3>
             </div>
-
         </div>
-
     </div>
 
-    <div class="col-md-3">
-
-        <div class="card shadow-sm">
-
-            <div class="card-body text-center">
-
-                <h5>Ditolak</h5>
-
-                <h2>{{ $ditolak }}</h2>
-
+    <div class="col-6 col-md-3">
+        <div class="card border text-center h-100">
+            <div class="card-body py-3">
+                <h6 class="text-muted mb-2">Revisi</h6>
+                <h3 class="mb-0">{{ $revisi }}</h3>
             </div>
-
         </div>
+    </div>
 
+    <div class="col-6 col-md-3">
+        <div class="card border text-center h-100">
+            <div class="card-body py-3">
+                <h6 class="text-muted mb-2">Ditolak</h6>
+                <h3 class="mb-0">{{ $ditolak }}</h3>
+            </div>
+        </div>
     </div>
 
 </div>

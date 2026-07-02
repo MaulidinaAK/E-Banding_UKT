@@ -58,6 +58,11 @@
 
     </a>
 
+    <a href="{{ route('admin.riwayat') }}"
+   class="btn btn-success">
+    Riwayat
+</a>
+
 </div>
 
 @endsection
