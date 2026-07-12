@@ -69,13 +69,19 @@
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="stat-card green">
-            <div>
-                <h6>Status Terakhir</h6>
+   <div class="col-md-4">
+    <div class="stat-card card-pending">
 
-                <h3>
+        <div>
+
+            <h6>Status Terakhir</h6>
+
+            <h3>
+
+                @if($pengajuanTerakhir)
+
                     @switch($pengajuanTerakhir->status)
+
                         @case('Pending TU')
                             Verifikasi TU
                             @break
@@ -84,16 +90,27 @@
                             Verifikasi Kaprodi
                             @break
 
+                        @case('Pending Dekan')
+                            Verifikasi Dekan
+                            @break
+
                         @default
                             {{ $pengajuanTerakhir->status }}
+
                     @endswitch
-                </h3>
-            </div>
 
-            <i class="bi bi-clock-history stat-icon"></i>
+                @else
+
+                    Belum Ada Pengajuan
+
+                @endif
+
+            </h3>
+
         </div>
+
+        <i class="bi bi-hourglass-split stat-icon"></i>
+
     </div>
-
 </div>
-
 @endsection

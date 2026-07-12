@@ -1,51 +1,126 @@
 <!DOCTYPE html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+<head>
 
-        <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <title>E-Banding UKT</title>
 
-        <!-- Scripts -->
-        <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <?php if (isset($component)) { $__componentOriginal8892e718f3d0d7a916180885c6f012e7 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal8892e718f3d0d7a916180885c6f012e7 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.application-logo','data' => ['class' => 'w-20 h-20 fill-current text-gray-500']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('application-logo'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['class' => 'w-20 h-20 fill-current text-gray-500']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal8892e718f3d0d7a916180885c6f012e7)): ?>
-<?php $attributes = $__attributesOriginal8892e718f3d0d7a916180885c6f012e7; ?>
-<?php unset($__attributesOriginal8892e718f3d0d7a916180885c6f012e7); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal8892e718f3d0d7a916180885c6f012e7)): ?>
-<?php $component = $__componentOriginal8892e718f3d0d7a916180885c6f012e7; ?>
-<?php unset($__componentOriginal8892e718f3d0d7a916180885c6f012e7); ?>
-<?php endif; ?>
-                </a>
-            </div>
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                <?php echo e($slot); ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-            </div>
-        </div>
-    </body>
-</html>
-<?php /**PATH C:\Users\Maulidina Aisha K\Documents\KULIAH\4. Semester 4\Analisis dan Desain Sistem 4B\App E-Banding UKT\resources\views/layouts/guest.blade.php ENDPATH**/ ?>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body
+style="
+font-family:Inter,sans-serif;
+background:#F4F7FC;
+">
+
+<div
+style="
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px;
+">
+
+<div
+style="
+width:1000px;
+max-width:100%;
+display:grid;
+grid-template-columns:380px 520px;
+background:white;
+border-radius:30px;
+overflow:hidden;
+box-shadow:0 25px 70px rgba(37,99,235,.10);
+">
+
+    <!-- LEFT -->
+
+   <div
+class="login-left"
+style="
+background:linear-gradient(
+135deg,
+#163B9D 0%,
+#2563EB 45%,
+#60A5FA 100%
+);
+position:relative;
+overflow:hidden;
+color:white;
+padding:60px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+">
+
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+
+    <div style="font-size:70px;">
+        🎓
+    </div>
+
+    <h1 style="font-size:42px;font-weight:700;margin-top:20px;">
+        E-Banding UKT
+    </h1>
+
+    <p style="margin-top:18px;line-height:1.8;color:#E2E8F0;font-size:17px;">
+        Sistem digital untuk pengajuan banding
+        Uang Kuliah Tunggal secara mudah,
+        transparan, dan efisien.
+    </p>
+
+</div>
+
+
+    <!-- RIGHT -->
+
+    <div
+    style="
+    padding:70px 60px;
+    ">
+
+        <h2
+        style="
+        font-size:34px;
+        color:#1E3A8A;
+        font-weight:700;
+        ">
+
+            Welcome Back 👋
+
+        </h2>
+
+        <p
+        style="
+        color:#64748B;
+        margin-bottom:35px;
+        ">
+
+            Login untuk melanjutkan ke sistem.
+
+        </p>
+
+        <?php echo e($slot); ?>
+
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+</html><?php /**PATH C:\Users\Maulidina Aisha K\Documents\KULIAH\4. Semester 4\Analisis dan Desain Sistem 4B\App E-Banding UKT\resources\views/layouts/guest.blade.php ENDPATH**/ ?>

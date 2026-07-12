@@ -67,13 +67,19 @@
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="stat-card green">
-            <div>
-                <h6>Status Terakhir</h6>
+   <div class="col-md-4">
+    <div class="stat-card card-pending">
 
-                <h3>
+        <div>
+
+            <h6>Status Terakhir</h6>
+
+            <h3>
+
+                <?php if($pengajuanTerakhir): ?>
+
                     <?php switch($pengajuanTerakhir->status):
+
                         case ('Pending TU'): ?>
                             Verifikasi TU
                             <?php break; ?>
@@ -82,18 +88,29 @@
                             Verifikasi Kaprodi
                             <?php break; ?>
 
+                        <?php case ('Pending Dekan'): ?>
+                            Verifikasi Dekan
+                            <?php break; ?>
+
                         <?php default: ?>
                             <?php echo e($pengajuanTerakhir->status); ?>
 
+
                     <?php endswitch; ?>
-                </h3>
-            </div>
 
-            <i class="bi bi-clock-history stat-icon"></i>
+                <?php else: ?>
+
+                    Belum Ada Pengajuan
+
+                <?php endif; ?>
+
+            </h3>
+
         </div>
+
+        <i class="bi bi-hourglass-split stat-icon"></i>
+
     </div>
-
 </div>
-
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Maulidina Aisha K\Documents\KULIAH\4. Semester 4\Analisis dan Desain Sistem 4B\App E-Banding UKT\resources\views/dashboard/mahasiswa.blade.php ENDPATH**/ ?>

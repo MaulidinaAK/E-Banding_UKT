@@ -412,6 +412,8 @@ box-shadow:0 8px 18px rgba(36,86,212,.30);
 .stat-card.green{
     border-left:5px solid #22c55e;
 }
+
+
 </style>
 
 </head>
