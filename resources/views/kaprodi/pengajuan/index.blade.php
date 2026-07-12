@@ -2,6 +2,18 @@
 
 @section('content')
 
+<div class="mb-3">
+
+    <a href="{{ route('kaprodi.dashboard') }}"
+       class="btn btn-sm btn-outline-primary">
+
+        <i class="bi bi-arrow-left"></i>
+        Dashboard
+
+    </a>
+
+</div>
+
 <h2 class="mb-4">Verifikasi Pengajuan Banding UKT</h2>
 
 <div class="card shadow-sm">

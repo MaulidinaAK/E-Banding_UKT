@@ -25,12 +25,31 @@
 
 <?php $__env->startSection('content'); ?>
 
+<div class="mb-3">
+
+    <a href="<?php echo e(route('mahasiswa.dashboard')); ?>"
+       class="btn btn-sm btn-outline-primary">
+
+        <i class="bi bi-arrow-left"></i>
+        Dashboard
+
+    </a>
+
+</div>
+
+
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <h2>Daftar Pengajuan Banding UKT</h2>
+    <h2 class="mb-0">
+        Daftar Pengajuan Banding UKT
+    </h2>
 
-    <a href="<?php echo e(route('pengajuan.create')); ?>" class="btn btn-primary">
+
+    <a href="<?php echo e(route('pengajuan.create')); ?>"
+       class="btn btn-primary">
+
         + Ajukan Banding
+
     </a>
 
 </div>
@@ -45,7 +64,7 @@
 <div class="card shadow-sm">
     <div class="card-body">
 
-        <table class="table table-bordered table-hover">
+       <table class="table table-bordered table-hover table-card">
 
             <thead class="table-primary">
 
@@ -54,9 +73,10 @@
                     <th>Semester</th>
                     <th>UKT Saat Ini</th>
                     <th>UKT Diajukan</th>
-                    <th>Bukti</th>
+                    <th>Dokumen</th>
                      <th>Tanggal Pengajuan</th>
                     <th>Status</th> 
+                    <th>Aksi</th>
                 </tr>
 
             </thead>
@@ -75,17 +95,36 @@
 
                         <td>Rp <?php echo e(number_format($pengajuan->ukt_pengajuan,0,',','.')); ?></td>
 
-                        <td>
-                        <?php if($pengajuan->bukti): ?>
-                            <a href="<?php echo e(asset('storage/' . $pengajuan->bukti)); ?>"
-                            target="_blank"
-                            class="btn btn-sm btn-info">
-                                Lihat File
-                            </a>
-                        <?php else: ?>
-                            -
-                        <?php endif; ?>
-                    </td>
+                       <td>
+
+    <?php
+        $jumlahDokumen = collect([
+            $pengajuan->ktm,
+            $pengajuan->kartu_keluarga,
+            $pengajuan->slip_gaji,
+            $pengajuan->surat_tidak_beasiswa,
+            $pengajuan->tagihan_listrik_air,
+            $pengajuan->dokumen_tanggungan,
+            $pengajuan->foto_rumah,
+            $pengajuan->surat_pendukung,
+        ])->filter()->count();
+    ?>
+
+    <?php if($jumlahDokumen > 0): ?>
+
+        <span class="badge bg-success">
+            <?php echo e($jumlahDokumen); ?> Dokumen
+        </span>
+
+    <?php else: ?>
+
+        <span class="badge bg-danger">
+            Tidak Ada
+        </span>
+
+    <?php endif; ?>
+
+</td>
 
                       <td>
         <?php echo e($pengajuan->created_at->format('d M Y')); ?>
@@ -110,7 +149,21 @@
         <?php echo e($pengajuan->status); ?>
 
 
-<?php endswitch; ?></td>
+<?php endswitch; ?>
+
+</td>
+
+<td>
+
+    <a href="<?php echo e(route('pengajuan.show', $pengajuan->id)); ?>"
+       class="btn btn-outline-primary btn-sm">
+
+        <i class="bi bi-eye"></i>
+        Detail
+
+    </a>
+
+</td>
 
                     </tr>
 
@@ -118,7 +171,7 @@
 
                     <tr>
 
-                        <td colspan="7" class="text-center">
+                        <td colspan="8" class="text-center">
 
                             Belum ada pengajuan.
 
@@ -133,6 +186,7 @@
         </table>
 
     </div>
+    
 </div>
 
 <?php $__env->stopSection(); ?>

@@ -114,41 +114,57 @@
 
 }
 
-.table{
+/* =======================
+   TABEL DAFTAR (CARD)
+======================= */
 
-    border-collapse:separate;
+.table-card{
 
-    border-spacing:0 12px;
-
-}
-
-.table thead th{
-
-    border:none;
-
-    color:#64748B;
-
-    font-weight:600;
-
-    font-size:14px;
+    border-collapse: separate;
+    border-spacing: 0 12px;
 
 }
 
-.table tbody tr{
+.table-card thead th{
 
-    background:white;
-
-    box-shadow:0 4px 16px rgba(0,0,0,.04);
+    border: none;
+    color: #64748B;
+    font-weight: 600;
+    font-size: 14px;
 
 }
 
-.table tbody td{
+.table-card tbody tr{
 
-    vertical-align:middle;
+    background: white;
+    box-shadow: 0 4px 16px rgba(0,0,0,.04);
 
-    border:none;
+}
 
-    padding:18px;
+.table-card tbody td{
+
+    vertical-align: middle;
+    border: none;
+    padding: 18px;
+
+}
+
+/* =======================
+   TABEL DETAIL
+======================= */
+
+.table-detail{
+
+    border-collapse: collapse;
+    border-spacing: 0;
+
+}
+
+.table-detail td,
+.table-detail th{
+
+    vertical-align: middle;
+    padding: 12px 16px;
 
 }
 
@@ -406,11 +422,33 @@ box-shadow:0 8px 18px rgba(36,86,212,.30);
 }
 
 .stat-card.blue{
-    border-left:5px solid #3b82f6;
+    border-left:5px solid #2563EB;
+    background:#f8fbff;
 }
 
 .stat-card.green{
-    border-left:5px solid #22c55e;
+    border-left:5px solid #22C55E;
+    background:#f7fef9;
+}
+
+.stat-card.orange{
+    border-left:5px solid #F59E0B;
+    background:#fffaf2;
+}
+
+.stat-card.red{
+    border-left:5px solid #EF4444;
+    background:#fff7f7;
+}
+
+.stat-card.purple{
+    border-left:5px solid #8B5CF6;
+    background:#fbf9ff;
+}
+
+.stat-card.cyan{
+    border-left:5px solid #06B6D4;
+    background:#f3fdff;
 }
 
 

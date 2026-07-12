@@ -9,34 +9,48 @@ use Illuminate\View\View;
 
 class PengajuanController extends Controller
 {
-    public function index(): View
-    {
-        $pengajuans = Pengajuan::with('user')
-            ->latest()
-            ->get();
+    public function index(Request $request): View
+{
+    $query = Pengajuan::with('user');
 
-        return view('admin.pengajuan.index', compact('pengajuans'));
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
     }
+
+    $pengajuans = $query
+        ->latest()
+        ->get();
+
+    return view('admin.pengajuan.index', compact('pengajuans'));
+}
 
     public function show(Pengajuan $pengajuan): View
     {
         return view('admin.pengajuan.show', compact('pengajuan'));
     }
 
-    public function updateStatus(Request $request, Pengajuan $pengajuan)
-    {
-        $request->validate([
-            'status' => 'required'
-        ]);
+   public function updateStatus(Request $request, Pengajuan $pengajuan)
+{
+    $request->validate([
+        'status' => 'required|in:Pending Kaprodi,Revisi,Ditolak',
+        'catatan' => [
+            'nullable',
+            'string',
+            'required_if:status,Revisi,Ditolak',
+        ],
+    ], [
+        'catatan.required_if' => 'Catatan wajib diisi jika pengajuan direvisi atau ditolak.',
+    ]);
 
-        $pengajuan->update([
-            'status' => $request->status,
-        ]);
+    $pengajuan->update([
+        'status' => $request->status,
+        'catatan' => $request->catatan,
+    ]);
 
-        return redirect()
-            ->route('admin.pengajuan.show', $pengajuan)
-            ->with('success', 'Status berhasil diperbarui.');
-    }
+    return redirect()
+        ->route('admin.pengajuan.show', $pengajuan)
+        ->with('success', 'Status berhasil diperbarui.');
+}
 
     public function riwayat(): View
 {
@@ -95,10 +109,18 @@ class PengajuanController extends Controller
 {
     $request->validate([
         'status' => 'required|in:Pending Dekan,Revisi,Ditolak',
+        'catatan' => [
+            'nullable',
+            'string',
+            'required_if:status,Revisi,Ditolak',
+        ],
+    ], [
+        'catatan.required_if' => 'Catatan wajib diisi jika pengajuan direvisi atau ditolak.',
     ]);
 
     $pengajuan->update([
         'status' => $request->status,
+        'catatan' => $request->catatan,
         'kaprodi_verified_at' => now(),
     ]);
 
@@ -106,7 +128,6 @@ class PengajuanController extends Controller
         ->route('kaprodi.pengajuan.show', $pengajuan)
         ->with('success', 'Status berhasil diperbarui.');
 }
-
     public function kaprodiRiwayat(): View
 {
     $pengajuans = Pengajuan::with('user')

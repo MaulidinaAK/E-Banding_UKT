@@ -2,6 +2,16 @@
 
 <?php $__env->startSection('content'); ?>
 
+<div class="mb-3">
+
+    <a href="<?php echo e(route('admin.dashboard')); ?>"
+       class="btn btn-sm btn-outline-primary">
+
+        <i class="bi bi-arrow-left"></i>
+        Dashboard
+
+    </a>
+
 <h2 class="mb-4">Daftar Pengajuan Banding UKT</h2>
 
 <div class="card shadow-sm">

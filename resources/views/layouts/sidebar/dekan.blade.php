@@ -15,7 +15,7 @@
         Riwayat
     </a>
 
-    <a href="{{ route('profile.edit') }}"
+    <a href="{{ route('profile.show') }}"
        class="list-group-item list-group-item-action {{ request()->routeIs('profile.*') ? 'active' : '' }}">
         Profil
     </a>

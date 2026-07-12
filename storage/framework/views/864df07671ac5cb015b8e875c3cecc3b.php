@@ -15,7 +15,7 @@
         Riwayat
     </a>
 
-    <a href="<?php echo e(route('profile.edit')); ?>"
+    <a href="<?php echo e(route('profile.show')); ?>"
        class="list-group-item list-group-item-action <?php echo e(request()->routeIs('profile.*') ? 'active' : ''); ?>">
         Profil
     </a>

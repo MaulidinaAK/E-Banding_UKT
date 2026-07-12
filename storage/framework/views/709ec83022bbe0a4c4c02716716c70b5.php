@@ -2,6 +2,16 @@
 
 <?php $__env->startSection('content'); ?>
 
+<div class="mb-3">
+
+    <a href="<?php echo e(route('dekan.dashboard')); ?>"
+       class="btn btn-sm btn-outline-primary">
+
+        <i class="bi bi-arrow-left"></i>
+        Dashboard
+
+    </a>
+
 <h2 class="mb-4">Riwayat Verifikasi Dekan</h2>
 
 <div class="card shadow-sm">

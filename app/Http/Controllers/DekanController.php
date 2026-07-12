@@ -47,20 +47,22 @@ class DekanController extends Controller
      * Update status oleh Dekan
      */
     public function updateStatus(Request $request, Pengajuan $pengajuan)
-    {
-        $request->validate([
-            'status' => 'required|in:Disetujui,Revisi,Ditolak',
-        ]);
+{
+    $request->validate([
+        'status' => 'required|in:Disetujui,Revisi,Ditolak',
+        'catatan' => 'nullable|string'
+    ]);
 
-        $pengajuan->update([
-            'status' => $request->status,
-            'dekan_verified_at' => now(),
-        ]);
+    $pengajuan->update([
+        'status' => $request->status,
+        'catatan' => $request->catatan,
+        'dekan_verified_at' => now(),
+    ]);
 
-        return redirect()
-            ->route('dekan.pengajuan.show', $pengajuan)
-            ->with('success', 'Status berhasil diperbarui.');
-    }
+    return redirect()
+        ->route('dekan.pengajuan.show', $pengajuan)
+        ->with('success', 'Status berhasil diperbarui.');
+}
 
     public function dekanDashboard(): View
 {

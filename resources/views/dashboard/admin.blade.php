@@ -35,7 +35,7 @@
     </div>
 
     <div class="col-md-4">
-        <div class="stat-card yellow">
+        <div class="stat-card orange">
             <div>
                 <h6>Pending Verifikasi</h6>
                 <h3>{{ $pending }}</h3>

@@ -70,7 +70,7 @@
     </div>
 
    <div class="col-md-4">
-    <div class="stat-card card-pending">
+    <div class="stat-card orange">
 
         <div>
 
@@ -112,5 +112,18 @@
         <i class="bi bi-hourglass-split stat-icon"></i>
 
     </div>
+
+    <div class="mt-4">
+
+    <a href="{{ route('pengajuan.index') }}"
+       class="btn btn-primary">
+
+        <i class="bi bi-clock-history"></i>
+        Riwayat Pengajuan
+
+    </a>
+
+</div>
+
 </div>
 @endsection

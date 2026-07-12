@@ -68,7 +68,7 @@
     </div>
 
    <div class="col-md-4">
-    <div class="stat-card card-pending">
+    <div class="stat-card orange">
 
         <div>
 
@@ -111,6 +111,19 @@
         <i class="bi bi-hourglass-split stat-icon"></i>
 
     </div>
+
+    <div class="mt-4">
+
+    <a href="<?php echo e(route('pengajuan.index')); ?>"
+       class="btn btn-primary">
+
+        <i class="bi bi-clock-history"></i>
+        Riwayat Pengajuan
+
+    </a>
+
+</div>
+
 </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Maulidina Aisha K\Documents\KULIAH\4. Semester 4\Analisis dan Desain Sistem 4B\App E-Banding UKT\resources\views/dashboard/mahasiswa.blade.php ENDPATH**/ ?>

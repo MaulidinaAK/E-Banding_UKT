@@ -28,7 +28,7 @@
 
     <!-- Total Pengajuan -->
     <div class="col-md-4">
-        <div class="stat-card dark">
+        <div class="stat-card blue">
             <div>
                 <h6>Total Pengajuan</h6>
                 <h3><?php echo e($totalPengajuan); ?></h3>
@@ -39,7 +39,7 @@
 
     <!-- Menunggu Verifikasi -->
     <div class="col-md-4">
-        <div class="stat-card yellow">
+        <div class="stat-card orange">
             <div>
                 <h6>Menunggu Verifikasi</h6>
                 <h3><?php echo e($pendingKaprodi); ?></h3>
@@ -73,7 +73,7 @@
 
     <!-- Revisi -->
     <div class="col-md-4">
-        <div class="stat-card orange">
+        <div class="stat-card purple">
             <div>
                 <h6>Revisi</h6>
                 <h3><?php echo e($revisi); ?></h3>
@@ -81,6 +81,24 @@
             <i class="bi bi-pencil-square stat-icon"></i>
         </div>
     </div>
+
+    <div class="mt-4">
+
+    <a href="<?php echo e(route('kaprodi.pengajuan.index')); ?>"
+       class="btn btn-primary">
+
+        Kelola Pengajuan
+
+    </a>
+
+    <a href="<?php echo e(route('kaprodi.riwayat')); ?>"
+       class="btn btn-success">
+
+        Riwayat
+
+    </a>
+
+</div>
 
 </div>
 <?php $__env->stopSection(); ?>

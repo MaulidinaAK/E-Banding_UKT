@@ -1,10 +1,10 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
 <h2 class="mb-4">Detail Pengajuan Banding UKT</h2>
 
-{{-- Informasi Pengajuan --}}
+
 <div class="card shadow-sm mb-4">
 
     <div class="card-header bg-primary text-white">
@@ -17,34 +17,37 @@
 
             <tr>
                 <th width="250">Nama Mahasiswa</th>
-                <td>{{ $pengajuan->user->name }}</td>
+                <td><?php echo e($pengajuan->user->name); ?></td>
             </tr>
 
             <tr>
                 <th>Semester</th>
-                <td>{{ $pengajuan->semester }}</td>
+                <td><?php echo e($pengajuan->semester); ?></td>
             </tr>
 
             <tr>
                 <th>Tanggal Pengajuan</th>
                 <td>
-                    {{ $pengajuan->created_at->format('d F Y') }}
+                    <?php echo e($pengajuan->created_at->format('d F Y')); ?>
+
                     pukul
-                    {{ $pengajuan->created_at->format('H:i') }} WIB
+                    <?php echo e($pengajuan->created_at->format('H:i')); ?> WIB
                 </td>
             </tr>
 
             <tr>
                 <th>UKT Saat Ini</th>
                 <td>
-                    Rp {{ number_format($pengajuan->ukt_sekarang,0,',','.') }}
+                    Rp <?php echo e(number_format($pengajuan->ukt_sekarang,0,',','.')); ?>
+
                 </td>
             </tr>
 
             <tr>
                 <th>UKT Diajukan</th>
                 <td>
-                    Rp {{ number_format($pengajuan->ukt_pengajuan,0,',','.') }}
+                    Rp <?php echo e(number_format($pengajuan->ukt_pengajuan,0,',','.')); ?>
+
                 </td>
             </tr>
 
@@ -52,38 +55,39 @@
                 <th>Status</th>
                 <td>
 
-                    @switch($pengajuan->status)
+                    <?php switch($pengajuan->status):
 
-                        @case('Pending Dekan')
+                        case ('Pending Dekan'): ?>
                             <span class="badge bg-primary">
                                 Menunggu Verifikasi Dekan
                             </span>
-                        @break
+                        <?php break; ?>
 
-                        @case('Disetujui')
+                        <?php case ('Disetujui'): ?>
                             <span class="badge bg-success">
                                 Disetujui
                             </span>
-                        @break
+                        <?php break; ?>
 
-                        @case('Revisi')
+                        <?php case ('Revisi'): ?>
                             <span class="badge bg-warning text-dark">
                                 Revisi
                             </span>
-                        @break
+                        <?php break; ?>
 
-                        @case('Ditolak')
+                        <?php case ('Ditolak'): ?>
                             <span class="badge bg-danger">
                                 Ditolak
                             </span>
-                        @break
+                        <?php break; ?>
 
-                        @default
+                        <?php default: ?>
                             <span class="badge bg-secondary">
-                                {{ $pengajuan->status }}
+                                <?php echo e($pengajuan->status); ?>
+
                             </span>
 
-                    @endswitch
+                    <?php endswitch; ?>
 
                 </td>
             </tr>
@@ -94,7 +98,7 @@
 
 </div>
 
-{{-- Alasan --}}
+
 <div class="card shadow-sm mb-4">
 
     <div class="card-header bg-primary text-white">
@@ -103,13 +107,14 @@
 
     <div class="card-body">
 
-        {{ $pengajuan->alasan }}
+        <?php echo e($pengajuan->alasan); ?>
+
 
     </div>
 
 </div>
 
-{{-- Dokumen --}}
+
 <div class="card shadow-sm mb-4">
 
     <div class="card-header bg-primary text-white">
@@ -118,7 +123,7 @@
 
     <div class="card-body">
 
-        @php
+        <?php
             $dokumen = [
                 'Kartu Tanda Mahasiswa (KTM)' => $pengajuan->ktm,
                 'Kartu Keluarga' => $pengajuan->kartu_keluarga,
@@ -129,11 +134,11 @@
                 'Foto Rumah' => $pengajuan->foto_rumah,
                 'Surat Pendukung Lainnya' => $pengajuan->surat_pendukung,
             ];
-        @endphp
+        ?>
 
         <div class="row g-3">
 
-            @foreach($dokumen as $nama => $file)
+            <?php $__currentLoopData = $dokumen; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $nama => $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                 <div class="col-md-6">
 
@@ -145,32 +150,33 @@
 
                                 <h6 class="fw-semibold mb-1">
                                     <i class="bi bi-file-earmark-text text-primary me-2"></i>
-                                    {{ $nama }}
+                                    <?php echo e($nama); ?>
+
                                 </h6>
 
-                                @if($file)
+                                <?php if($file): ?>
 
                                     <small class="text-success">
                                         <i class="bi bi-check-circle-fill"></i>
                                         Dokumen tersedia
                                     </small>
 
-                                @else
+                                <?php else: ?>
 
                                     <small class="text-danger">
                                         <i class="bi bi-x-circle-fill"></i>
                                         Belum diunggah
                                     </small>
 
-                                @endif
+                                <?php endif; ?>
 
                             </div>
 
-                            @if($file)
+                            <?php if($file): ?>
 
                                 <div class="d-flex gap-2">
 
-                                    <a href="{{ asset('storage/'.$file) }}"
+                                    <a href="<?php echo e(asset('storage/'.$file)); ?>"
                                        target="_blank"
                                        class="btn btn-outline-primary btn-sm">
 
@@ -178,7 +184,7 @@
 
                                     </a>
 
-                                    <a href="{{ asset('storage/'.$file) }}"
+                                    <a href="<?php echo e(asset('storage/'.$file)); ?>"
                                        download
                                        class="btn btn-outline-success btn-sm">
 
@@ -188,7 +194,7 @@
 
                                 </div>
 
-                            @endif
+                            <?php endif; ?>
 
                         </div>
 
@@ -196,7 +202,7 @@
 
                 </div>
 
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
         </div>
 
@@ -204,7 +210,7 @@
 
 </div>
 
-{{-- Verifikasi --}}
+
 <div class="card shadow-sm">
 
     <div class="card-header bg-primary text-white">
@@ -213,16 +219,16 @@
 
     <div class="card-body">
 
-        @if($pengajuan->status == 'Pending Dekan')
+        <?php if($pengajuan->status == 'Pending Dekan'): ?>
 
             <div class="d-flex gap-2 flex-wrap">
 
-                {{-- SETUJUI --}}
-                <form action="{{ route('dekan.pengajuan.updateStatus',$pengajuan) }}"
+                
+                <form action="<?php echo e(route('dekan.pengajuan.updateStatus',$pengajuan)); ?>"
                       method="POST">
 
-                    @csrf
-                    @method('PATCH')
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PATCH'); ?>
 
                     <input type="hidden"
                            name="status"
@@ -239,7 +245,7 @@
                 </form>
 
 
-                {{-- REVISI --}}
+                
                 <button
                     class="btn btn-warning"
                     data-bs-toggle="modal"
@@ -252,7 +258,7 @@
                 </button>
 
 
-                {{-- TOLAK --}}
+                
                 <button
                     class="btn btn-danger"
                     data-bs-toggle="modal"
@@ -266,7 +272,7 @@
 
             </div>
 
-        @else
+        <?php else: ?>
 
             <div class="alert alert-info">
 
@@ -274,7 +280,7 @@
 
             </div>
 
-            @if($pengajuan->catatan)
+            <?php if($pengajuan->catatan): ?>
 
                 <div class="alert alert-warning mt-3">
 
@@ -282,17 +288,18 @@
 
                     <hr>
 
-                    {{ $pengajuan->catatan }}
+                    <?php echo e($pengajuan->catatan); ?>
+
 
                 </div>
 
-            @endif
+            <?php endif; ?>
 
-        @endif
+        <?php endif; ?>
 
         <hr>
 
-        <a href="{{ route('dekan.pengajuan.index') }}"
+        <a href="<?php echo e(route('dekan.pengajuan.index')); ?>"
            class="btn btn-secondary">
 
             <i class="bi bi-arrow-left"></i>
@@ -306,16 +313,16 @@
 </div>
 
 
-{{-- Modal Revisi --}}
+
 <div class="modal fade" id="modalRevisi" tabindex="-1">
 
     <div class="modal-dialog">
 
-        <form action="{{ route('dekan.pengajuan.updateStatus',$pengajuan) }}"
+        <form action="<?php echo e(route('dekan.pengajuan.updateStatus',$pengajuan)); ?>"
               method="POST">
 
-            @csrf
-            @method('PATCH')
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('PATCH'); ?>
 
             <input type="hidden"
                    name="status"
@@ -375,16 +382,16 @@
 </div>
 
 
-{{-- Modal Tolak --}}
+
 <div class="modal fade" id="modalTolak" tabindex="-1">
 
     <div class="modal-dialog">
 
-        <form action="{{ route('dekan.pengajuan.updateStatus',$pengajuan) }}"
+        <form action="<?php echo e(route('dekan.pengajuan.updateStatus',$pengajuan)); ?>"
               method="POST">
 
-            @csrf
-            @method('PATCH')
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('PATCH'); ?>
 
             <input type="hidden"
                    name="status"
@@ -443,4 +450,5 @@
 
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Maulidina Aisha K\Documents\KULIAH\4. Semester 4\Analisis dan Desain Sistem 4B\App E-Banding UKT\resources\views/dekan/pengajuan/show.blade.php ENDPATH**/ ?>
