@@ -1,5 +1,15 @@
 <?php $__env->startSection('content'); ?>
 
+<div class="mb-3">
+
+    <a href="<?php echo e(route('kaprodi.dashboard')); ?>"
+       class="btn btn-sm btn-outline-primary">
+
+        <i class="bi bi-arrow-left"></i>
+        Dashboard
+
+    </a>
+
 <h2 class="mb-4">Detail Pengajuan Banding UKT</h2>
 
 
@@ -214,66 +224,75 @@
         Verifikasi Pengajuan
     </div>
 
-    <div class="card-body text-center">
+    <div class="card-body">
+
+        <?php if($pengajuan->status != 'Pending Kaprodi'): ?>
+
+            <div class="alert alert-info mb-3">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                Pengajuan ini sudah diproses.
+            </div>
+
+            <?php if($pengajuan->catatan): ?>
+
+                <div class="alert alert-warning">
+                    <strong>Catatan Verifikator</strong>
+                    <hr>
+                    <?php echo e($pengajuan->catatan); ?>
+
+                </div>
+
+            <?php endif; ?>
+
+
+        <?php endif; ?>
+
 
         <?php if($pengajuan->status == 'Pending Kaprodi'): ?>
 
-            
-            <form action="<?php echo e(route('kaprodi.pengajuan.updateStatus',$pengajuan)); ?>"
-                  method="POST"
-                  class="d-inline">
+            <div class="d-flex gap-2 flex-wrap">
 
-                <?php echo csrf_field(); ?>
-                <?php echo method_field('PATCH'); ?>
+                
+                <form action="<?php echo e(route('kaprodi.pengajuan.updateStatus',$pengajuan)); ?>"
+                      method="POST">
 
-                <input type="hidden" name="status" value="Pending Dekan">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PATCH'); ?>
 
-                <button class="btn btn-success me-2">
-                    <i class="bi bi-check-circle"></i>
-                    Setujui
+                    <input type="hidden"
+                           name="status"
+                           value="Pending Dekan">
+
+                    <button class="btn btn-success">
+                        <i class="bi bi-check-circle"></i>
+                        Setujui
+                    </button>
+
+                </form>
+
+                
+                <button class="btn btn-warning"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalRevisi">
+
+                    <i class="bi bi-arrow-repeat"></i>
+                    Revisi
+
                 </button>
 
-            </form>
+                
+                <button class="btn btn-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalTolak">
 
-            
-            <button class="btn btn-warning me-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalRevisi">
+                    <i class="bi bi-x-circle"></i>
+                    Tolak
 
-                <i class="bi bi-arrow-repeat"></i>
-                Revisi
-
-            </button>
-
-            
-            <button class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalTolak">
-
-                <i class="bi bi-x-circle"></i>
-                Tolak
-
-            </button>
-
-        <?php else: ?>
-
-            <div class="alert alert-info mb-0">
-
-                Pengajuan ini sudah diproses.
+                </button>
 
             </div>
 
         <?php endif; ?>
-
-        <hr>
-
-        <a href="<?php echo e(route('kaprodi.pengajuan.index')); ?>"
-           class="btn btn-secondary">
-
-            <i class="bi bi-arrow-left"></i>
-            Kembali
-
-        </a>
 
     </div>
 

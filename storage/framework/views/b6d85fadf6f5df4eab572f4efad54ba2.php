@@ -33,9 +33,9 @@
     </div>
 
     <div class="col-md-4">
-        <div class="stat-card orange">
+        <div class="stat-card green">
             <div>
-                <h6>Pending Verifikasi</h6>
+                <h6>Disetujui</h6>
                 <h3><?php echo e($pending); ?></h3>
             </div>
             <i class="bi bi-hourglass-split stat-icon"></i>
@@ -43,10 +43,20 @@
     </div>
 
     <div class="col-md-4">
-        <div class="stat-card green">
+        <div class="stat-card red">
             <div>
-                <h6>Disetujui</h6>
-                <h3><?php echo e($disetujui); ?></h3>
+                <h6>Ditolak</h6>
+                <h3><?php echo e($ditolak); ?></h3>
+            </div>
+            <i class="bi bi-check-circle stat-icon"></i>
+        </div>
+    </div>
+
+     <div class="col-md-4">
+        <div class="stat-card purple">
+            <div>
+                <h6>Revisi</h6>
+                <h3><?php echo e($revisi); ?></h3>
             </div>
             <i class="bi bi-check-circle stat-icon"></i>
         </div>

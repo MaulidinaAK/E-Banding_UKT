@@ -2,6 +2,16 @@
 
 @section('content')
 
+<div class="mb-3">
+
+    <a href="{{ route('kaprodi.dashboard') }}"
+       class="btn btn-sm btn-outline-primary">
+
+        <i class="bi bi-arrow-left"></i>
+        Dashboard
+
+    </a>
+
 <h2 class="mb-4">Detail Pengajuan Banding UKT</h2>
 
 {{-- Informasi --}}
@@ -211,66 +221,74 @@
         Verifikasi Pengajuan
     </div>
 
-    <div class="card-body text-center">
+    <div class="card-body">
+
+        @if($pengajuan->status != 'Pending Kaprodi')
+
+            <div class="alert alert-info mb-3">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                Pengajuan ini sudah diproses.
+            </div>
+
+            @if($pengajuan->catatan)
+
+                <div class="alert alert-warning">
+                    <strong>Catatan Verifikator</strong>
+                    <hr>
+                    {{ $pengajuan->catatan }}
+                </div>
+
+            @endif
+
+
+        @endif
+
 
         @if($pengajuan->status == 'Pending Kaprodi')
 
-            {{-- Setujui --}}
-            <form action="{{ route('kaprodi.pengajuan.updateStatus',$pengajuan) }}"
-                  method="POST"
-                  class="d-inline">
+            <div class="d-flex gap-2 flex-wrap">
 
-                @csrf
-                @method('PATCH')
+                {{-- Setujui --}}
+                <form action="{{ route('kaprodi.pengajuan.updateStatus',$pengajuan) }}"
+                      method="POST">
 
-                <input type="hidden" name="status" value="Pending Dekan">
+                    @csrf
+                    @method('PATCH')
 
-                <button class="btn btn-success me-2">
-                    <i class="bi bi-check-circle"></i>
-                    Setujui
+                    <input type="hidden"
+                           name="status"
+                           value="Pending Dekan">
+
+                    <button class="btn btn-success">
+                        <i class="bi bi-check-circle"></i>
+                        Setujui
+                    </button>
+
+                </form>
+
+                {{-- Revisi --}}
+                <button class="btn btn-warning"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalRevisi">
+
+                    <i class="bi bi-arrow-repeat"></i>
+                    Revisi
+
                 </button>
 
-            </form>
+                {{-- Tolak --}}
+                <button class="btn btn-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalTolak">
 
-            {{-- Modal Revisi --}}
-            <button class="btn btn-warning me-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalRevisi">
+                    <i class="bi bi-x-circle"></i>
+                    Tolak
 
-                <i class="bi bi-arrow-repeat"></i>
-                Revisi
-
-            </button>
-
-            {{-- Modal Tolak --}}
-            <button class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalTolak">
-
-                <i class="bi bi-x-circle"></i>
-                Tolak
-
-            </button>
-
-        @else
-
-            <div class="alert alert-info mb-0">
-
-                Pengajuan ini sudah diproses.
+                </button>
 
             </div>
 
         @endif
-
-        <hr>
-
-        <a href="{{ route('kaprodi.pengajuan.index') }}"
-           class="btn btn-secondary">
-
-            <i class="bi bi-arrow-left"></i>
-            Kembali
-
-        </a>
 
     </div>
 

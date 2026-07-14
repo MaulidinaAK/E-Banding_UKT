@@ -85,7 +85,7 @@
     <a href="<?php echo e(route('kaprodi.pengajuan.index')); ?>"
        class="btn btn-primary">
 
-        Kelola Pengajuan
+        Verifikasi Pengajuan
 
     </a>
 

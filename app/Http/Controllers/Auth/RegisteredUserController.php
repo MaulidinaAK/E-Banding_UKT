@@ -28,25 +28,31 @@ class RegisteredUserController extends Controller
      *
      * @throws ValidationException
      */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+  public function store(Request $request): RedirectResponse
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'nim' => ['required', 'string', 'unique:users,nim'],
+        'email' => ['required', 'email', 'unique:users,email'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
 
-        $user = User::create([
-    'name' => $request->name,
-    'email' => $request->email,
-    'password' => Hash::make($request->password),
-    'role_id' => 1,
-]);
+    $data = [
+        'name' => $request->name,
+        'nim' => $request->nim,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'role_id' => 1,
+    ];
 
-        event(new Registered($user));
+    $user = new User($data);
 
-        Auth::login($user);
+    $user->save();   // <-- INI YANG KEMARIN HILANG
 
-        return redirect(route('dashboard', absolute: false));
-    }
+    event(new Registered($user));
+
+    Auth::login($user);
+
+    return redirect()->route('mahasiswa.dashboard');
+}
 }

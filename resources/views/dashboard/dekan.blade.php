@@ -26,26 +26,52 @@ Dashboard Dekan
 
 <div class="row g-3">
 
+    <!-- Total Pengajuan -->
     <div class="col-md-4">
         <div class="stat-card blue">
+            <div>
+                <h6>Total Pengajuan</h6>
+                <h3>{{ $totalPengajuan }}</h3>
+            </div>
+            <i class="bi bi-folder stat-icon"></i>
+        </div>
+    </div>
+
+    <!-- Menunggu Verifikasi -->
+    <div class="col-md-4">
+        <div class="stat-card orange">
             <div>
                 <h6>Menunggu Verifikasi</h6>
                 <h3>{{ $pendingFinal }}</h3>
             </div>
-            <i class="bi bi-clipboard-check stat-icon"></i>
+            <i class="bi bi-hourglass stat-icon"></i>
         </div>
     </div>
 
+
+    <!-- Disetujui -->
     <div class="col-md-4">
         <div class="stat-card green">
             <div>
-                <h6>Disetujui Dekan</h6>
+                <h6>Disetujui Kaprodi</h6>
                 <h3>{{ $approvedFinal }}</h3>
             </div>
-            <i class="bi bi-check-circle-fill stat-icon"></i>
+            <i class="bi bi-check2-circle stat-icon"></i>
         </div>
     </div>
 
+      <!-- Revisi -->
+    <div class="col-md-4">
+        <div class="stat-card purple">
+            <div>
+                <h6>Revisi</h6>
+                <h3>{{ $revisiFinal }}</h3>
+            </div>
+            <i class="bi bi-pencil-square stat-icon"></i>
+        </div>
+    </div>
+
+    <!-- Ditolak -->
     <div class="col-md-4">
         <div class="stat-card red">
             <div>

@@ -9,32 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+   public function up(): void
 {
-    Schema::table('users', function (Blueprint $table) {
-
-        $table->string('nim')->nullable();
-        $table->string('nip')->nullable();
-
-        $table->string('prodi')->nullable();
-        $table->string('fakultas')->nullable();
-
-        $table->string('semester')->nullable();
-
-        $table->string('no_hp')->nullable();
-
-        $table->string('foto')->nullable();
-
-    });
+    //
 }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
-    }
+public function down(): void
+{
+    //
+}
 };

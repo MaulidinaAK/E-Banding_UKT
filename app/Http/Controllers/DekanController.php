@@ -66,16 +66,32 @@ class DekanController extends Controller
 
     public function dekanDashboard(): View
 {
+
+     $totalPengajuan = Pengajuan::whereNotNull('dekan_verified_at')->count();
+
     $pendingFinal = Pengajuan::where('status', 'Pending Dekan')->count();
 
-    $approvedFinal = Pengajuan::where('status', 'Disetujui')->count();
+    $approvedFinal = Pengajuan::where('status', 'Disetujui')
+        ->whereNotNull('dekan_verified_at')
+        ->count();
 
-    $rejected = Pengajuan::where('status', 'Ditolak')->count();
+    $revisiFinal = Pengajuan::where('status', 'Revisi')
+        ->whereNotNull('dekan_verified_at')
+        ->count();
+
+    $rejected = Pengajuan::where('status', 'Ditolak')
+        ->whereNotNull('dekan_verified_at')
+        ->count();
+
+    
 
     return view('dashboard.dekan', compact(
+        'totalPengajuan',
         'pendingFinal',
         'approvedFinal',
+        'revisiFinal',
         'rejected'
     ));
 }
 }
+

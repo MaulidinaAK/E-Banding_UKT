@@ -60,6 +60,17 @@
         </div>
     </div>
 
+      <!-- Revisi -->
+    <div class="col-md-4">
+        <div class="stat-card purple">
+            <div>
+                <h6>Revisi</h6>
+                <h3>{{ $revisi }}</h3>
+            </div>
+            <i class="bi bi-pencil-square stat-icon"></i>
+        </div>
+    </div>
+
     <!-- Ditolak -->
     <div class="col-md-4">
         <div class="stat-card red">
@@ -71,23 +82,14 @@
         </div>
     </div>
 
-    <!-- Revisi -->
-    <div class="col-md-4">
-        <div class="stat-card purple">
-            <div>
-                <h6>Revisi</h6>
-                <h3>{{ $revisi }}</h3>
-            </div>
-            <i class="bi bi-pencil-square stat-icon"></i>
-        </div>
-    </div>
+  
 
     <div class="mt-4">
 
     <a href="{{ route('kaprodi.pengajuan.index') }}"
        class="btn btn-primary">
 
-        Kelola Pengajuan
+        Verifikasi Pengajuan
 
     </a>
 

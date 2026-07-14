@@ -92,12 +92,14 @@ class PengajuanController extends Controller
 
     $ditolak = Pengajuan::where('status', 'Ditolak')->count();
 
+    $revisi = Pengajuan::where('status', 'Revisi')->count();
+
     return view('dashboard.admin', compact(
-        'totalPengajuan',
-        'pending',
-        'disetujui',
-        'ditolak'
-    ));
+    'totalPengajuan',
+    'pending',
+    'ditolak',
+    'revisi'
+));
 }
 
     public function kaprodiShow(Pengajuan $pengajuan): View
@@ -144,18 +146,24 @@ public function kaprodiDashboard(): View
 
     $pendingKaprodi = Pengajuan::where('status', 'Pending Kaprodi')->count();
 
-    $revisi = Pengajuan::where('status', 'Revisi')->count();
+    $approved = Pengajuan::where('status', 'Pending Dekan')
+        ->whereNotNull('kaprodi_verified_at')
+        ->count();
 
-    $ditolak = Pengajuan::where('status', 'Ditolak')->count();
+    $revisi = Pengajuan::where('status', 'Revisi')
+        ->whereNotNull('kaprodi_verified_at')
+        ->count();
 
-    $approved = Pengajuan::where('status', 'Pending Dekan')->count();
+    $ditolak = Pengajuan::where('status', 'Ditolak')
+        ->whereNotNull('kaprodi_verified_at')
+        ->count();
 
     return view('dashboard.kaprodi', compact(
         'totalPengajuan',
         'pendingKaprodi',
+        'approved',
         'revisi',
-        'ditolak',
-        'approved'
+        'ditolak'
     ));
 }
 

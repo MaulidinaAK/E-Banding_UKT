@@ -2,6 +2,16 @@
 
 @section('content')
 
+<div class="mb-3">
+
+    <a href="{{ route('dekan.dashboard') }}"
+       class="btn btn-sm btn-outline-primary">
+
+        <i class="bi bi-arrow-left"></i>
+        Dashboard
+
+    </a>
+
 <h2 class="mb-4">Detail Pengajuan Banding UKT</h2>
 
 {{-- Informasi Pengajuan --}}
@@ -213,11 +223,31 @@
 
     <div class="card-body">
 
+        @if($pengajuan->status != 'Pending Dekan')
+
+            <div class="alert alert-info mb-3">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                Pengajuan ini sudah diproses.
+            </div>
+
+            @if($pengajuan->catatan)
+
+                <div class="alert alert-warning">
+                    <strong>Catatan Verifikator</strong>
+                    <hr>
+                    {{ $pengajuan->catatan }}
+                </div>
+
+            @endif
+
+        @endif
+
+
         @if($pengajuan->status == 'Pending Dekan')
 
             <div class="d-flex gap-2 flex-wrap">
 
-                {{-- SETUJUI --}}
+                {{-- Setujui --}}
                 <form action="{{ route('dekan.pengajuan.updateStatus',$pengajuan) }}"
                       method="POST">
 
@@ -229,77 +259,35 @@
                            value="Disetujui">
 
                     <button class="btn btn-success">
-
                         <i class="bi bi-check-circle"></i>
-
                         Setujui
-
                     </button>
 
                 </form>
 
-
-                {{-- REVISI --}}
-                <button
-                    class="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalRevisi">
+                {{-- Revisi --}}
+                <button class="btn btn-warning"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalRevisi">
 
                     <i class="bi bi-arrow-repeat"></i>
-
                     Revisi
 
                 </button>
 
-
-                {{-- TOLAK --}}
-                <button
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalTolak">
+                {{-- Tolak --}}
+                <button class="btn btn-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalTolak">
 
                     <i class="bi bi-x-circle"></i>
-
                     Tolak
 
                 </button>
 
             </div>
 
-        @else
-
-            <div class="alert alert-info">
-
-                Pengajuan ini sudah diproses.
-
-            </div>
-
-            @if($pengajuan->catatan)
-
-                <div class="alert alert-warning mt-3">
-
-                    <strong>Catatan Verifikator</strong>
-
-                    <hr>
-
-                    {{ $pengajuan->catatan }}
-
-                </div>
-
-            @endif
-
         @endif
-
-        <hr>
-
-        <a href="{{ route('dekan.pengajuan.index') }}"
-           class="btn btn-secondary">
-
-            <i class="bi bi-arrow-left"></i>
-
-            Kembali
-
-        </a>
 
     </div>
 
