@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('sidebar'); ?>
 
 <div class="list-group">

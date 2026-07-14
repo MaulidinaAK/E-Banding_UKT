@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
 
 <h2 class="mb-4">
