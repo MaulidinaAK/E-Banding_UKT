@@ -1,5 +1,15 @@
 <?php $__env->startSection('content'); ?>
 
+<div class="mb-3">
+
+    <a href="<?php echo e(route('admin.dashboard')); ?>"
+       class="btn btn-sm btn-outline-primary">
+
+        <i class="bi bi-arrow-left"></i>
+        Dashboard
+
+    </a>
+
 <h2 class="mb-4">Detail Pengajuan Banding UKT</h2>
 
 
@@ -226,6 +236,26 @@
 
     <div class="card-body">
 
+        <?php if($pengajuan->status != 'Pending TU'): ?>
+
+            <div class="alert alert-info mb-3">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                Pengajuan ini sudah diproses.
+            </div>
+
+            <?php if($pengajuan->catatan): ?>
+
+                <div class="alert alert-warning">
+                    <strong>Catatan Verifikator</strong>
+                    <hr>
+                    <?php echo e($pengajuan->catatan); ?>
+
+                </div>
+
+            <?php endif; ?>
+
+        <?php endif; ?>
+
         <?php if($pengajuan->status == 'Pending TU'): ?>
 
             <div class="d-flex gap-2 flex-wrap">
@@ -233,7 +263,6 @@
                 
                 <form action="<?php echo e(route('admin.pengajuan.updateStatus',$pengajuan)); ?>"
                       method="POST">
-
                     <?php echo csrf_field(); ?>
                     <?php echo method_field('PATCH'); ?>
 
@@ -242,78 +271,31 @@
                            value="Pending Kaprodi">
 
                     <button class="btn btn-success">
-
                         <i class="bi bi-check-circle"></i>
-
                         Setujui
-
                     </button>
 
                 </form>
 
-
                 
-                <button
-                    class="btn btn-warning"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalRevisi">
-
+                <button class="btn btn-warning"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalRevisi">
                     <i class="bi bi-arrow-repeat"></i>
-
                     Revisi
-
                 </button>
-
 
                 
-                <button
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#modalTolak">
-
+                <button class="btn btn-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalTolak">
                     <i class="bi bi-x-circle"></i>
-
                     Tolak
-
                 </button>
 
             </div>
-
-        <?php else: ?>
-
-            <div class="alert alert-info">
-
-                Pengajuan ini sudah diproses.
-
-            </div>
-
-            <?php if($pengajuan->catatan): ?>
-
-                <div class="alert alert-warning mt-3">
-
-                    <strong>Catatan Verifikator</strong>
-
-                    <hr>
-
-                    <?php echo e($pengajuan->catatan); ?>
-
-
-                </div>
-
-            <?php endif; ?>
 
         <?php endif; ?>
-
-        <hr>
-
-        <a href="<?php echo e(route('admin.pengajuan.index')); ?>"
-           class="btn btn-secondary">
-
-            <i class="bi bi-arrow-left"></i>
-
-            Kembali
-
-        </a>
 
     </div>
 

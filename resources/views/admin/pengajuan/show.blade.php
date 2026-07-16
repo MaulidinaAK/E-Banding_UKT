@@ -2,6 +2,16 @@
 
 @section('content')
 
+<div class="mb-3">
+
+    <a href="{{ route('admin.dashboard') }}"
+       class="btn btn-sm btn-outline-primary">
+
+        <i class="bi bi-arrow-left"></i>
+        Dashboard
+
+    </a>
+
 <h2 class="mb-4">Detail Pengajuan Banding UKT</h2>
 
 {{-- Informasi Pengajuan --}}
@@ -239,14 +249,6 @@
                 </div>
 
             @endif
-
-            <a href="{{ route('admin.pengajuan.index') }}"
-               class="btn btn-secondary mb-4">
-                <i class="bi bi-arrow-left"></i>
-                Kembali
-            </a>
-
-            <hr>
 
         @endif
 

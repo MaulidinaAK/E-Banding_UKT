@@ -26,8 +26,10 @@ class Pengajuan extends Model
 
     'status',
 
+    'admin_verified_at',
     'kaprodi_verified_at',
     'dekan_verified_at',
+
     'catatan',
 ];
 

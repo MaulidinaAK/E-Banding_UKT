@@ -33,14 +33,24 @@
     </div>
 
     <div class="col-md-4">
-        <div class="stat-card green">
+        <div class="stat-card orange">
             <div>
-                <h6>Disetujui</h6>
+                <h6>Menunggu Verifikasi</h6>
                 <h3><?php echo e($pending); ?></h3>
             </div>
             <i class="bi bi-hourglass-split stat-icon"></i>
         </div>
     </div>
+
+    <div class="col-md-4">
+    <div class="stat-card green">
+        <div>
+            <h6>Disetujui</h6>
+            <h3><?php echo e($disetujui); ?></h3>
+        </div>
+        <i class="bi bi-check-circle stat-icon"></i>
+    </div>
+</div>
 
     <div class="col-md-4">
         <div class="stat-card red">

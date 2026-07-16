@@ -29,7 +29,7 @@ Dashboard Dekan
         <div class="stat-card blue">
             <div>
                 <h6>Total Pengajuan</h6>
-                <h3><?php echo e($totalPengajuan); ?></h3>
+                <h3><?php echo e($totalPengajuanFinal); ?></h3>
             </div>
             <i class="bi bi-folder stat-icon"></i>
         </div>

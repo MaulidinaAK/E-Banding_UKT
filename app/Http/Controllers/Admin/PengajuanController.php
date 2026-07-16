@@ -11,7 +11,8 @@ class PengajuanController extends Controller
 {
     public function index(Request $request): View
 {
-    $query = Pengajuan::with('user');
+    $query = Pengajuan::with('user')
+        ->where('status', 'Pending TU');
 
     if ($request->filled('status')) {
         $query->where('status', $request->status);
@@ -42,26 +43,26 @@ class PengajuanController extends Controller
         'catatan.required_if' => 'Catatan wajib diisi jika pengajuan direvisi atau ditolak.',
     ]);
 
-    $pengajuan->update([
-        'status' => $request->status,
-        'catatan' => $request->catatan,
-    ]);
+   $data = [
+    'status' => $request->status,
+    'catatan' => $request->catatan,
+];
+
+if ($request->status == 'Pending Kaprodi') {
+    $data['admin_verified_at'] = now();
+}
+
+$pengajuan->update($data);
 
     return redirect()
         ->route('admin.pengajuan.show', $pengajuan)
         ->with('success', 'Status berhasil diperbarui.');
 }
 
-    public function riwayat(): View
+   public function riwayat(): View
 {
     $pengajuans = Pengajuan::with('user')
-        ->where(function ($query) {
-            $query->where('status', 'Pending Kaprodi')
-                  ->orWhere(function ($q) {
-                      $q->whereIn('status', ['Revisi', 'Ditolak'])
-                        ->whereNull('kaprodi_verified_at');
-                  });
-        })
+        ->whereNotNull('admin_verified_at')
         ->latest()
         ->get();
 
@@ -82,24 +83,29 @@ class PengajuanController extends Controller
 {
     $totalPengajuan = Pengajuan::count();
 
-    $pending = Pengajuan::whereIn('status', [
-        'Pending TU',
-        'Pending Kaprodi',
-        'Pending Dekan'
-    ])->count();
+    // Masih menunggu Admin TU
+    $pending = Pengajuan::where('status', 'Pending TU')->count();
 
-    $disetujui = Pengajuan::where('status', 'Disetujui')->count();
+    // Semua yang pernah disetujui Admin
+    $disetujui = Pengajuan::whereNotNull('admin_verified_at')->count();
 
-    $ditolak = Pengajuan::where('status', 'Ditolak')->count();
+    // Revisi oleh Admin
+    $revisi = Pengajuan::whereNull('kaprodi_verified_at')
+        ->where('status', 'Revisi')
+        ->count();
 
-    $revisi = Pengajuan::where('status', 'Revisi')->count();
+    // Ditolak oleh Admin
+    $ditolak = Pengajuan::whereNull('kaprodi_verified_at')
+        ->where('status', 'Ditolak')
+        ->count();
 
     return view('dashboard.admin', compact(
-    'totalPengajuan',
-    'pending',
-    'ditolak',
-    'revisi'
-));
+        'totalPengajuan',
+        'pending',
+        'disetujui',
+        'revisi',
+        'ditolak'
+    ));
 }
 
     public function kaprodiShow(Pengajuan $pengajuan): View
@@ -142,20 +148,24 @@ class PengajuanController extends Controller
 
 public function kaprodiDashboard(): View
 {
-    $totalPengajuan = Pengajuan::whereNotNull('kaprodi_verified_at')->count();
+    $totalPengajuan = Pengajuan::whereNotNull('admin_verified_at')->count();
 
     $pendingKaprodi = Pengajuan::where('status', 'Pending Kaprodi')->count();
 
-    $approved = Pengajuan::where('status', 'Pending Dekan')
-        ->whereNotNull('kaprodi_verified_at')
+    // Semua yang pernah disetujui Kaprodi
+    $approved = Pengajuan::whereNotNull('kaprodi_verified_at')
+        ->whereIn('status', [
+            'Pending Dekan',
+            'Disetujui'
+        ])
         ->count();
 
-    $revisi = Pengajuan::where('status', 'Revisi')
-        ->whereNotNull('kaprodi_verified_at')
+    $revisi = Pengajuan::whereNotNull('kaprodi_verified_at')
+        ->where('status', 'Revisi')
         ->count();
 
-    $ditolak = Pengajuan::where('status', 'Ditolak')
-        ->whereNotNull('kaprodi_verified_at')
+    $ditolak = Pengajuan::whereNotNull('kaprodi_verified_at')
+        ->where('status', 'Ditolak')
         ->count();
 
     return view('dashboard.kaprodi', compact(
@@ -166,5 +176,4 @@ public function kaprodiDashboard(): View
         'ditolak'
     ));
 }
-
 }

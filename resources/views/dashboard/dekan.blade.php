@@ -31,7 +31,7 @@ Dashboard Dekan
         <div class="stat-card blue">
             <div>
                 <h6>Total Pengajuan</h6>
-                <h3>{{ $totalPengajuan }}</h3>
+                <h3>{{ $totalPengajuanFinal }}</h3>
             </div>
             <i class="bi bi-folder stat-icon"></i>
         </div>
