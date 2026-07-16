@@ -59,6 +59,7 @@
 
 <div class="row g-3">
 
+    {{-- Total Pengajuan --}}
     <div class="col-md-4">
         <div class="stat-card blue">
             <div>
@@ -69,51 +70,54 @@
         </div>
     </div>
 
-   <div class="col-md-4">
-    <div class="stat-card orange">
+    {{-- Status Terakhir --}}
+    <div class="col-md-4">
+        <div class="stat-card orange">
+            <div>
 
-        <div>
+                <h6>Status Terakhir</h6>
 
-            <h6>Status Terakhir</h6>
+                <h3>
 
-            <h3>
+                    @if($pengajuanTerakhir)
 
-                @if($pengajuanTerakhir)
+                        @switch($pengajuanTerakhir->status)
 
-                    @switch($pengajuanTerakhir->status)
+                            @case('Pending TU')
+                                Verifikasi TU
+                                @break
 
-                        @case('Pending TU')
-                            Verifikasi TU
-                            @break
+                            @case('Pending Kaprodi')
+                                Verifikasi Kaprodi
+                                @break
 
-                        @case('Pending Kaprodi')
-                            Verifikasi Kaprodi
-                            @break
+                            @case('Pending Dekan')
+                                Verifikasi Dekan
+                                @break
 
-                        @case('Pending Dekan')
-                            Verifikasi Dekan
-                            @break
+                            @default
+                                {{ $pengajuanTerakhir->status }}
 
-                        @default
-                            {{ $pengajuanTerakhir->status }}
+                        @endswitch
 
-                    @endswitch
+                    @else
 
-                @else
+                        Belum Ada Pengajuan
 
-                    Belum Ada Pengajuan
+                    @endif
 
-                @endif
+                </h3>
 
-            </h3>
+            </div>
+
+            <i class="bi bi-hourglass-split stat-icon"></i>
 
         </div>
-
-        <i class="bi bi-hourglass-split stat-icon"></i>
-
     </div>
 
-    <div class="mt-4">
+</div>
+
+<div class="mt-4">
 
     <a href="{{ route('pengajuan.index') }}"
        class="btn btn-primary">
@@ -123,7 +127,14 @@
 
     </a>
 
-</div>
+    <a href="{{ route('pengajuan.create') }}"
+       class="btn btn-success">
+
+        <i class="bi bi-file-earmark-plus"></i>
+        Ajukan Banding
+
+    </a>
 
 </div>
+
 @endsection

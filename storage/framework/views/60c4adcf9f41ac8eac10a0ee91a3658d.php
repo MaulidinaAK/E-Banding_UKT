@@ -57,6 +57,7 @@
 
 <div class="row g-3">
 
+    
     <div class="col-md-4">
         <div class="stat-card blue">
             <div>
@@ -67,52 +68,55 @@
         </div>
     </div>
 
-   <div class="col-md-4">
-    <div class="stat-card orange">
+    
+    <div class="col-md-4">
+        <div class="stat-card orange">
+            <div>
 
-        <div>
+                <h6>Status Terakhir</h6>
 
-            <h6>Status Terakhir</h6>
+                <h3>
 
-            <h3>
+                    <?php if($pengajuanTerakhir): ?>
 
-                <?php if($pengajuanTerakhir): ?>
+                        <?php switch($pengajuanTerakhir->status):
 
-                    <?php switch($pengajuanTerakhir->status):
+                            case ('Pending TU'): ?>
+                                Verifikasi TU
+                                <?php break; ?>
 
-                        case ('Pending TU'): ?>
-                            Verifikasi TU
-                            <?php break; ?>
+                            <?php case ('Pending Kaprodi'): ?>
+                                Verifikasi Kaprodi
+                                <?php break; ?>
 
-                        <?php case ('Pending Kaprodi'): ?>
-                            Verifikasi Kaprodi
-                            <?php break; ?>
+                            <?php case ('Pending Dekan'): ?>
+                                Verifikasi Dekan
+                                <?php break; ?>
 
-                        <?php case ('Pending Dekan'): ?>
-                            Verifikasi Dekan
-                            <?php break; ?>
-
-                        <?php default: ?>
-                            <?php echo e($pengajuanTerakhir->status); ?>
+                            <?php default: ?>
+                                <?php echo e($pengajuanTerakhir->status); ?>
 
 
-                    <?php endswitch; ?>
+                        <?php endswitch; ?>
 
-                <?php else: ?>
+                    <?php else: ?>
 
-                    Belum Ada Pengajuan
+                        Belum Ada Pengajuan
 
-                <?php endif; ?>
+                    <?php endif; ?>
 
-            </h3>
+                </h3>
+
+            </div>
+
+            <i class="bi bi-hourglass-split stat-icon"></i>
 
         </div>
-
-        <i class="bi bi-hourglass-split stat-icon"></i>
-
     </div>
 
-    <div class="mt-4">
+</div>
+
+<div class="mt-4">
 
     <a href="<?php echo e(route('pengajuan.index')); ?>"
        class="btn btn-primary">
@@ -122,8 +126,15 @@
 
     </a>
 
-</div>
+    <a href="<?php echo e(route('pengajuan.create')); ?>"
+       class="btn btn-success">
+
+        <i class="bi bi-file-earmark-plus"></i>
+        Ajukan Banding
+
+    </a>
 
 </div>
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Maulidina Aisha K\Documents\KULIAH\4. Semester 4\Analisis dan Desain Sistem 4B\App E-Banding UKT\resources\views/dashboard/mahasiswa.blade.php ENDPATH**/ ?>
