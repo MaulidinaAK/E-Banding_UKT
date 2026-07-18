@@ -91,6 +91,8 @@
                 Login
             </button>
 
+           
+
             @if (Route::has('password.request'))
                 <div class="text-center mt-3">
                     <a
@@ -100,6 +102,17 @@
                     </a>
                 </div>
             @endif
+
+             <div class="mt-4 text-center">
+    <span class="text-sm text-gray-600">
+        Belum memiliki akun?
+    </span>
+
+    <a href="{{ route('register') }}"
+       class="text-sm font-semibold text-blue-600 hover:text-blue-800 hover:underline">
+        Daftar di sini
+    </a>
+</div>
 
         </div>
 
